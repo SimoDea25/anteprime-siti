@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Korabì Hair Rituals - Torino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-primary: #c94d71;
+      --c-secondary: #2a2a2a;
+      --c-bg-light: #fafafa;
+      --c-bg-dark: #f2e6e8;
+      --c-white: #ffffff;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --transition: 0.3s ease;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:var(--font-body);
+      line-height:1.6;
+      color:var(--c-secondary);
+      background:var(--c-bg-light);
+    }
+    header{
+      background:var(--c-white);
+      padding:1rem 2rem;
+      position:sticky;top:0;z-index:10;
+      box-shadow:0 2px 4px rgba(0,0,0,0.05);
+    }
+    nav{
+      display:flex;gap:2rem;flex-wrap:wrap;
+      font-weight:500;
+    }
+    nav a{
+      text-decoration:none;color:var(--c-secondary);
+      transition:color var(--transition);
+    }
+    nav a:hover{color:var(--c-primary);}
+    .hero{
+      padding:4rem 2rem;
+      background:linear-gradient(135deg,var(--c-primary),#e07b9b);
+      color:var(--c-white);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero h1{
+      font-family:var(--font-heading);
+      font-size:4rem;
+      margin-bottom:.5rem;
+    }
+    .hero p{
+      font-size:1.25rem;
+      margin-bottom:1.5rem;
+    }
+    .hero .cta{
+      display:inline-block;
+      background:var(--c-white);
+      color:var(--c-primary);
+      padding:.75rem 1.5rem;
+      border-radius:4px;
+      text-decoration:none;
+      font-weight:600;
+      transition:background var(--transition),color var(--transition);
+    }
+    .hero .cta:hover{
+      background:var(--c-bg-light);
+    }
+    .hero svg{
+      position:absolute;
+      fill:rgba(255,255,255,0.12);
+    }
+    .hero .svg-scissors{
+      top:-40px;right:-30px;width:250px;height:auto;
+    }
+    .hero .svg-comb{
+      bottom:-50px;left:-40px;width:300px;height:auto;
+    }
+    section{
+      padding:3rem 2rem;
+      opacity:0;
+      transform:translateY(20px);
+      transition:opacity .6s var(--transition),transform .6s var(--transition);
+    }
+    section.visible{opacity:1;transform:none;}
+    .services{
+      display:flex;gap:1.5rem;flex-wrap:wrap;
+    }
+    .card{
+      flex:1 1 calc(33.333% - 1rem);
+      min-width:260px;
+      background:var(--c-white);
+      border:1px solid var(--c-bg-dark);
+      padding:1.5rem;
+      cursor:pointer;
+      position:relative;
+      transition:background var(--transition);
+    }
+    .card:hover{background:var(--c-bg-dark);}
+    .card h3{
+      margin-bottom:.5rem;
+      font-family:var(--font-heading);
+      font-size:1.5rem;
+    }
+    .tooltip{
+      position:absolute;top:8px;right:8px;background:var(--c-primary);
+      color:#fff;padding:2px 6px;font-size:.75rem;border-radius:3px;
+      animation:blink 2s infinite;
+    }
+    @keyframes blink{0%,100%{opacity:0.8}50%{opacity:0.4}}
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);justify-content:center;align-items:center;
+      padding:1rem;
+    }
+    .modal.active{display:flex;}
+    .modal-content{
+      background:var(--c-white);
+      max-width:500px;
+      width:100%;
+      padding:2rem;
+      border-radius:6px;
+      position:relative;
+    }
+    .modal-content h4{
+      margin-bottom:.5rem;
+      font-family:var(--font-heading);
+    }
+    .close{
+      position:absolute;top:10px;right:10px;background:none;border:none;
+      font-size:1.5rem;cursor:pointer;color:var(--c-secondary);
+    }
+    .why{
+      background:var(--c-bg-dark);
+      color:var(--c-secondary);
+    }
+    .why ul{list-style:none;padding-left:0}
+    .why li{
+      margin-bottom:1rem;
+      font-size:1.1rem;
+      display:flex;align-items:center;
+    }
+    .why li::before{
+      content:"✓";
+      color:var(--c-primary);
+      font-weight:700;
+      margin-right:.5rem;
+    }
+    .claim{
+      background:var(--c-primary);
+      color:var(--c-white);
+      text-align:center;
+      padding:2rem 1rem;
+      font-family:var(--font-heading);
+      font-size:2rem;
+    }
+    .contact{
+      background:var(--c-white);
+    }
+    .contact form{
+      display:grid;gap:1rem;max-width:500px;
+    }
+    .contact input, .contact textarea{
+      width:100%;padding:.75rem;border:1px solid #ccc;
+      border-radius:4px;font-family:inherit;
+    }
+    .contact button{
+      background:var(--c-primary);color:#fff;
+      border:none;padding:.75rem 1.5rem;
+      cursor:pointer;font-weight:600;
+      transition:background var(--transition);
+    }
+    .contact button:hover{background:#b33b5e;}
+    footer{
+      background:var(--c-secondary);
+      color:#fff;padding:1.5rem 2rem;
+      font-size:.9rem;
+    }
+    @media(max-width:768px){
+      .hero h1{font-size:3rem;}
+      .services{flex-direction:column;}
+      .card{flex:1 1 100%;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#servizi">Servizi</a>
+      <a href="#perche">Perché sceglierci</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <svg class="svg-scissors" viewBox="0 0 64 64" aria-hidden="true"><path d="M2 12l10 10-8 8 2 2 8-8 8 8 2-2-8-8 10-10-2-2-10 10-10-10zM54 12l-10 10 8 8-2 2-8-8-8 8-2-2 8-8-10-10 2-2 10 10 10-10z"/></svg>
+    <svg class="svg-comb" viewBox="0 0 64 64" aria-hidden="true"><path d="M4 28h56v4H4zM4 36h56v4H4zM4 44h40v4H4zM4 20h56v4H4z"/></svg>
+    <h1>Korabì Hair Rituals</h1>
+    <p>Il tuo rituale di bellezza a Torino</p>
+    <a href="#contatti" class="cta">Prenota ora</a>
+  </section>
+
+  <section id="servizi" class="services">
+    <h2 style="width:100%;font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1rem;">I nostri servizi</h2>
+    <div class="card" data-modal="modal1">
+      <h3>Taglio donna</h3>
+      <p>Stile personalizzato per ogni occasione.</p>
+      <div class="tooltip">Clicca per il dettaglio</div>
+    </div>
+    <div class="card" data-modal="modal2">
+      <h3>Colorazione</h3>
+      <p>Tecniche all’avanguardia per colori vibranti.</p>
+    </div>
+    <div class="card" data-modal="modal3">
+      <h3>Trattamento capelli</h3>
+      <p>Rigenerazione e lucentezza con prodotti naturali.</p>
+    </div>
+  </section>
+
+  <section id="perche" class="why">
+    <h2 style="font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1rem;">Perché sceglierci</h2>
+    <ul>
+      <li>Esperienza e passione: professionisti certificati.</li>
+      <li>Ambiente accogliente e rilassante.</li>
+      <li>Prodotti di alta qualità, cruelty‑free.</li>
+    </ul>
+  </section>
+
+  <section class="claim">
+    Bellezza su misura, ogni giorno.
+  </section>
+
+  <section id="contatti" class="contact">
+    <h2 style="font-family:var(--font-heading);font-size:2.5rem;margin-bottom:1rem;">Contattaci</h2>
+    <p><strong>Indirizzo:</strong> Via Vittorio Asinari di Bernezzo, 86, 10146 Torino TO, Italy</p>
+    <p><strong>Telefono:</strong> 375 692 1229</p>
+    <form id="demoForm">
+      <input type="text" name="nome" placeholder="Il tuo nome" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="tel" placeholder="Telefono">
+      <textarea name="messaggio" rows="4" placeholder="Messaggio"></textarea>
+      <button type="submit">Invia</button>
+    </form>
+    <p id="formMsg" style="margin-top:1rem;color:var(--c-primary);display:none;">Grazie! Ti contatteremo a breve (demo dimostrativa, i dati inseriti qui non vengono salvati).</p>
+  </section>
+
+  <footer>
+    <p>Korabì Hair Rituals - Torino</p>
+    <p>Simone Deangelis | +39 351 781 9937</p>
+  </footer>
+
+  <!-- Modali -->
+  <div id="modal1" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Chiudi">&times;</button>
+      <h4>Taglio donna</h4>
+      <p>Consulenza su misura, taglio in base alla forma del viso e alle tue preferenze. <em>Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</em></p>
+    </div>
+  </div>
+  <div id="modal2" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Chiudi">&times;</button>
+      <h4>Colorazione</h4>
+      <p>Applicazione di tecniche come balayage, ombre e tinte full‑color, con prodotti a base di ingredienti naturali. <em>Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</em></p>
+    </div>
+  </div>
+  <div id="modal3" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" aria-label="Chiudi">&times;</button>
+      <h4>Trattamento capelli</h4>
+      <p>Maschere nutritive, trattamenti alla cheratina e massaggi del cuoio capelluto per capelli più sani e brillanti. <em>Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</em></p>
+    </div>
+  </div>
+
+  <script>
+    // IntersectionObserver per animazioni di scroll
+    const observer = new IntersectionObserver((entries)=> {
+      entries.forEach(entry=> {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    },{threshold:0.1});
+    document.querySelectorAll('section').forEach(sec=>observer.observe(sec));
+
+    // Modali
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click',()=> {
+        const id = card.dataset.modal;
+        const modal = document.getElementById(id);
+        if(modal) modal.classList.add('active');
+        // Rimuove tooltip al primo click
+        const tooltip = card.querySelector('.tooltip');
+        if(tooltip) tooltip.style.display='none';
+      });
+    });
+    document.querySelectorAll('.close').forEach(btn=>{
+      btn.addEventListener('click',()=> {
+        btn.closest('.modal').classList.remove('active');
+      });
+    });
+    // Chiudi modale cliccando fuori
+    document.querySelectorAll('.modal').forEach(m=> {
+      m.addEventListener('click',e=> {
+        if(e.target===m) m.classList.remove('active');
+      });
+    });
+
+    // Form demo
+    const form = document.getElementById('demoForm');
+    const msg = document.getElementById('formMsg');
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      msg.style.display='block';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
