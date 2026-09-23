@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>La Taverna Dei Mercanti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9a2b1f;
+            --primary-dark: #6e1e15;
+            --secondary: #f2e6d8;
+            --ink: #2a221c;
+            --paper: #fffaf3;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Karla',sans-serif;
+            color:var(--ink);
+            background:var(--paper);
+            line-height:1.65;
+        }
+        a { color:inherit; text-decoration:none; }
+        h1,h2,h3 { font-family:'Playfair Display',serif; }
+        img,svg { display:block; }
+
+        header {
+            position:sticky; top:0; z-index:50;
+            background:var(--paper);
+            border-bottom:1px solid rgba(0,0,0,.08);
+        }
+        .nav {
+            max-width:1160px; margin:auto; padding:1rem 1.5rem;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav .brand { font-size:1.3rem; font-weight:700; color:var(--primary); }
+        .nav ul { list-style:none; display:flex; gap:2rem; }
+        .nav a { font-weight:500; font-size:.95rem; transition:color .25s; }
+        .nav a:hover { color:var(--primary); }
+
+        section { padding:5rem 1.5rem; position:relative; overflow:hidden; }
+        .section-inner { max-width:1160px; margin:auto; }
+        .eyebrow {
+            text-transform:uppercase; letter-spacing:.12em; font-size:.78rem;
+            font-weight:700; color:var(--primary); margin-bottom:.6rem;
+        }
+        .section-title { font-size:2.1rem; margin-bottom:2.2rem; max-width:520px; }
+
+        /* Hero */
+        .hero { background:var(--secondary); padding-top:6rem; padding-bottom:6rem; }
+        .hero .blob {
+            position:absolute; border-radius:50%; filter:blur(90px); opacity:.35; z-index:0;
+        }
+        .hero .blob-a { width:340px; height:340px; background:var(--primary); top:-120px; right:-100px; }
+        .hero .blob-b { width:260px; height:260px; background:#c98a3f; bottom:-100px; left:-80px; }
+        .hero-content { position:relative; z-index:1; max-width:620px; }
+        .hero h1 { font-size:clamp(2.4rem,5vw,3.8rem); line-height:1.08; color:var(--primary-dark); margin-bottom:1rem; }
+        .hero p.lead { font-size:1.2rem; color:#4a3c30; margin-bottom:2rem; max-width:480px; }
+        .btn {
+            display:inline-block; background:var(--primary); color:#fff;
+            padding:.85rem 1.7rem; border-radius:.4rem; font-weight:700;
+            border:none; cursor:pointer; font-size:1rem; transition:background .25s, transform .25s;
+        }
+        .btn:hover { background:var(--primary-dark); transform:translateY(-2px); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary-dark);
+            padding:.85rem 1.7rem; border-radius:.4rem; font-weight:700;
+            border:2px solid var(--primary-dark); cursor:pointer; font-size:1rem; margin-left:.75rem;
+            transition:background .25s, color .25s;
+        }
+        .btn-outline:hover { background:var(--primary-dark); color:#fff; }
+
+        /* Manifesto strip */
+        .manifesto { background:var(--primary-dark); color:#fff; text-align:center; padding:3.2rem 1.5rem; }
+        .manifesto p { font-family:'Playfair Display',serif; font-size:1.7rem; max-width:760px; margin:auto; font-style:italic; }
+
+        /* Menu */
+        .menu-hint {
+            display:inline-flex; align-items:center; gap:.4rem;
+            font-size:.85rem; font-weight:700; color:var(--primary);
+            background:#fff; border:1px solid var(--primary); border-radius:2rem;
+            padding:.35rem .9rem; margin-bottom:1.6rem;
+            animation:pulse 1.8s ease-in-out infinite;
+        }
+        .menu-hint .arrow { display:inline-block; animation:bounce 1.2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
+        @keyframes bounce { 0%,100%{transform:translateX(0);} 50%{transform:translateX(4px);} }
+
+        .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .card {
+            background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:.6rem;
+            padding:1.6rem; cursor:pointer; text-align:left;
+            transition:transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .card:hover { transform:translateY(-5px); border-color:var(--primary); box-shadow:0 10px 24px rgba(154,43,31,.12); }
+        .card h3 { font-size:1.25rem; margin-bottom:.4rem; color:var(--primary-dark); }
+        .card p { font-size:.92rem; color:#5c5044; }
+        .card .see-more { display:block; margin-top:.8rem; font-size:.82rem; font-weight:700; color:var(--primary); }
+
+        /* Why */
+        .why-section { background:var(--secondary); }
+        .why-list { display:flex; flex-direction:column; gap:1.4rem; max-width:640px; }
+        .why-item { display:flex; gap:1rem; align-items:flex-start; }
+        .why-num {
+            flex-shrink:0; width:2.4rem; height:2.4rem; border-radius:50%;
+            background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center;
+            font-family:'Playfair Display',serif; font-weight:700;
+        }
+
+        /* Booking */
+        form { max-width:440px; }
+        .field { margin-bottom:1.1rem; }
+        .field label { display:block; font-size:.85rem; font-weight:700; margin-bottom:.35rem; color:#5c5044; }
+        .field input, .field select {
+            width:100%; padding:.7rem .8rem; border:1px solid rgba(0,0,0,.18);
+            border-radius:.4rem; font-family:inherit; font-size:1rem; background:#fff;
+        }
+        .field input:focus, .field select:focus { outline:2px solid var(--primary); border-color:var(--primary); }
+        .demo-note { font-size:.8rem; color:#8a7c6c; margin-top:.6rem; }
+
+        /* Contact */
+        .contact-info { display:flex; flex-direction:column; gap:.6rem; font-size:1.05rem; }
+        .contact-info strong { color:var(--primary-dark); }
+
+        footer {
+            background:var(--ink); color:#d9cfc2; text-align:center;
+            padding:1.6rem 1.5rem; font-size:.85rem;
+        }
+        footer a { color:#fff; text-decoration:underline; }
+
+        /* Modal */
+        .modal-overlay {
+            display:none; position:fixed; inset:0; background:rgba(20,14,10,.55);
+            z-index:100; align-items:center; justify-content:center; padding:1.5rem;
+        }
+        .modal-overlay.open { display:flex; }
+        .modal-box {
+            background:#fff; border-radius:.7rem; max-width:440px; width:100%;
+            padding:2rem; position:relative;
+        }
+        .modal-box h3 { color:var(--primary-dark); font-size:1.4rem; margin-bottom:.8rem; }
+        .modal-box .dish { margin-bottom:.9rem; }
+        .modal-box .dish strong { display:block; font-size:1rem; }
+        .modal-box .dish span { font-size:.88rem; color:#5c5044; }
+        .modal-close {
+            position:absolute; top:.9rem; right:1rem; background:none; border:none;
+            font-size:1.4rem; cursor:pointer; color:#8a7c6c; line-height:1;
+        }
+        .modal-example-note { font-size:.78rem; color:#a08f7c; margin-top:1rem; border-top:1px solid rgba(0,0,0,.08); padding-top:.8rem; }
+
+        /* Scroll reveal */
+        .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease-out, transform .6s ease-out; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        @media (max-width:720px) {
+            .nav ul { display:none; }
+            .btn-outline { margin-left:0; margin-top:.75rem; display:block; width:fit-content; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="brand">La Taverna Dei Mercanti</div>
+        <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#perche">Perché noi</a></li>
+            <li><a href="#prenota">Prenota</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="section-inner hero-content">
+        <div class="eyebrow">Torino · Cucina piemontese</div>
+        <h1>La Taverna Dei Mercanti</h1>
+        <p class="lead">Un indirizzo storico nel cuore di Torino, dove le ricette di famiglia incontrano ingredienti scelti ogni giorno con cura.</p>
+        <a href="#menu" class="btn">Scopri il menu</a>
+        <a href="#prenota" class="btn-outline">Prenota un tavolo</a>
+    </div>
+</section>
+
+<section class="manifesto reveal">
+    <p>&ldquo;La buona cucina non si affretta: si tramanda.&rdquo;</p>
+</section>
+
+<section id="menu" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Il menu</div>
+        <h2 class="section-title">Quattro proposte, una tradizione</h2>
+        <div class="menu-hint"><span class="arrow">→</span> Clicca su una carta per il dettaglio</div>
+        <div class="cards">
+            <div class="card" data-modal="antipasti">
+                <h3>Antipasti</h3>
+                <p>Selezioni del territorio, servite come da tradizione piemontese.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="primi">
+                <h3>Primi piatti</h3>
+                <p>Paste fresche e risotti, preparati ogni giorno in cucina.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="secondi">
+                <h3>Secondi piatti</h3>
+                <p>Carni e piatti della casa, cotture lente e ingredienti locali.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="dolci">
+                <h3>Dolci</h3>
+                <p>Dolci fatti in casa per chiudere il pasto in bellezza.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="perche" class="why-section reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Perché sceglierci</div>
+        <h2 class="section-title">Quello che ci contraddistingue</h2>
+        <div class="why-list">
+            <div class="why-item">
+                <div class="why-num">1</div>
+                <div>Ingredienti selezionati ogni giorno, con attenzione alla stagionalità.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">2</div>
+                <div>Ricette di famiglia, tramandate e curate nei dettagli.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">3</div>
+                <div>Un ambiente accogliente, adatto sia a cene informali sia a occasioni speciali.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="prenota" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Prenotazioni</div>
+        <h2 class="section-title">Richiedi un tavolo</h2>
+        <form id="booking-form">
+            <div class="field">
+                <label for="name">Nome e cognome</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="field">
+                <label for="date">Data</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="field">
+                <label for="people">Numero di persone</label>
+                <select id="people" required>
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5+">5+</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Invia richiesta</button>
+            <p class="demo-note">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+        </form>
+    </div>
+</section>
+
+<section id="contatti" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Contatti</div>
+        <h2 class="section-title">Dove trovarci</h2>
+        <div class="contact-info">
+            <div><strong>Indirizzo:</strong> Via Santa Chiara, 13, 10122 Torino TO</div>
+            <div><strong>Telefono:</strong> <a href="tel:+390115212017">011 521 2017</a></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    La Taverna Dei Mercanti &middot; Torino<br>
+    Anteprima realizzata da Simone Deangelis &middot; <a href="tel:+393517819937">+39 351 781 9937</a>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" id="modal-close" aria-label="Chiudi">&times;</button>
+        <div id="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    var menuDetails = {
+        antipasti: {
+            title: "Antipasti",
+            dishes: [
+                ["Vitello tonnato della casa", "Vitello cotto lentamente, salsa tonnata classica."],
+                ["Tagliere di salumi e formaggi locali", "Selezione a rotazione secondo stagione."],
+                ["Bruschette del giorno", "Pane tostato, topping variabile ogni giorno."]
+            ]
+        },
+        primi: {
+            title: "Primi piatti",
+            dishes: [
+                ["Agnolotti del plin al burro e salvia", "Ripieno di brasato, ricetta della casa."],
+                ["Risotto al Barolo", "Riso Carnaroli, riduzione di vino rosso piemontese."],
+                ["Tajarin al ragù bianco", "Pasta all'uovo tirata sottile, ragù di vitello."]
+            ]
+        },
+        secondi: {
+            title: "Secondi piatti",
+            dishes: [
+                ["Brasato al Barolo", "Cottura lenta, servito con polenta morbida."],
+                ["Bollito misto della tradizione", "Con bagnetto verde e salsa rubra."],
+                ["Piatto vegetariano del giorno", "Verdure di stagione, proposta a rotazione."]
+            ]
+        },
+        dolci: {
+            title: "Dolci",
+            dishes: [
+                ["Bonet piemontese", "Il classico budino al cioccolato e amaretti."],
+                ["Panna cotta ai frutti di bosco", "Preparata fresca ogni giorno."],
+                ["Tiramisù della casa", "Ricetta tradizionale."]
+            ]
+        }
+    };
+
+    var overlay = document.getElementById('modal-overlay');
+    var modalContent = document.getElementById('modal-content');
+    var hint = document.querySelector('.menu-hint');
+
+    function openModal(key) {
+        var data = menuDetails[key];
+        if (!data) return;
+        var html = '<h3>' + data.title + '</h3>';
+        data.dishes.forEach(function (d) {
+            html += '<div class="dish"><strong>' + d[0] + '</strong><span>' + d[1] + '</span></div>';
+        });
+        html += '<div class="modal-example-note">Esempio dimostrativo — il menu reale verrà personalizzato insieme a voi.</div>';
+        modalContent.innerHTML = html;
+        overlay.classList.add('open');
+        if (hint) { hint.style.display = 'none'; }
+    }
+
+    document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            openModal(card.getAttribute('data-modal'));
+        });
+    });
+    document.getElementById('modal-close').addEventListener('click', function () {
+        overlay.classList.remove('open');
+    });
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) { overlay.classList.remove('open'); }
+    });
+
+    document.getElementById('booking-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Grazie! Ti contatteremo a breve per confermare la prenotazione.');
+        this.reset();
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+</body>
+</html>
