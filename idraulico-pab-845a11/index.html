@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Idraulico P.A.B. di Piecoro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1d5f8a;
+            --primary-dark: #123f5c;
+            --accent: #e2b93b;
+            --secondary: #eaf2f6;
+            --ink: #1c2530;
+            --paper: #ffffff;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Inter',sans-serif;
+            color:var(--ink);
+            background:var(--paper);
+            line-height:1.65;
+        }
+        a { color:inherit; text-decoration:none; }
+        h1,h2,h3 { font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; letter-spacing:.02em; }
+
+        header {
+            position:sticky; top:0; z-index:50;
+            background:var(--paper);
+            border-bottom:1px solid rgba(0,0,0,.08);
+        }
+        .nav {
+            max-width:1160px; margin:auto; padding:1rem 1.5rem;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav .brand { font-family:'Barlow Condensed',sans-serif; font-size:1.4rem; font-weight:700; color:var(--primary-dark); text-transform:uppercase; }
+        .nav ul { list-style:none; display:flex; gap:2rem; }
+        .nav a { font-weight:500; font-size:.95rem; transition:color .25s; }
+        .nav a:hover { color:var(--primary); }
+
+        section { padding:5rem 1.5rem; position:relative; overflow:hidden; }
+        .section-inner { max-width:1160px; margin:auto; }
+        .eyebrow {
+            text-transform:uppercase; letter-spacing:.12em; font-size:.78rem;
+            font-weight:700; color:var(--primary); margin-bottom:.6rem;
+        }
+        .section-title { font-size:2.3rem; margin-bottom:2.2rem; max-width:560px; }
+
+        .hero { background:var(--secondary); padding-top:6rem; padding-bottom:6rem; }
+        .hero .blob { position:absolute; border-radius:50%; filter:blur(90px); opacity:.3; z-index:0; }
+        .hero .blob-a { width:320px; height:320px; background:var(--primary); top:-100px; right:-90px; }
+        .hero .blob-b { width:240px; height:240px; background:var(--accent); bottom:-90px; left:-70px; }
+        .hero-content { position:relative; z-index:1; max-width:620px; }
+        .hero .eyebrow { color:var(--primary-dark); }
+        .hero h1 { font-size:clamp(2.3rem,5vw,3.6rem); line-height:1.05; color:var(--primary-dark); margin-bottom:1rem; }
+        .hero p.lead { font-size:1.15rem; color:#3c4a58; margin-bottom:2rem; max-width:480px; }
+        .btn {
+            display:inline-block; background:var(--primary); color:#fff;
+            padding:.85rem 1.7rem; border-radius:.35rem; font-weight:700;
+            border:none; cursor:pointer; font-size:1rem; transition:background .25s, transform .25s;
+        }
+        .btn:hover { background:var(--primary-dark); transform:translateY(-2px); }
+        .btn-outline {
+            display:inline-block; background:transparent; color:var(--primary-dark);
+            padding:.85rem 1.7rem; border-radius:.35rem; font-weight:700;
+            border:2px solid var(--primary-dark); cursor:pointer; font-size:1rem; margin-left:.75rem;
+            transition:background .25s, color .25s;
+        }
+        .btn-outline:hover { background:var(--primary-dark); color:#fff; }
+
+        .manifesto { background:var(--primary-dark); color:#fff; text-align:center; padding:3rem 1.5rem; }
+        .manifesto p { font-family:'Barlow Condensed',sans-serif; font-size:1.7rem; text-transform:uppercase; letter-spacing:.03em; max-width:760px; margin:auto; }
+
+        .service-hint {
+            display:inline-flex; align-items:center; gap:.4rem;
+            font-size:.85rem; font-weight:700; color:var(--primary);
+            background:#fff; border:1px solid var(--primary); border-radius:2rem;
+            padding:.35rem .9rem; margin-bottom:1.6rem;
+            animation:pulse 1.8s ease-in-out infinite;
+        }
+        .service-hint .arrow { display:inline-block; animation:bounce 1.2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
+        @keyframes bounce { 0%,100%{transform:translateX(0);} 50%{transform:translateX(4px);} }
+
+        .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .card {
+            background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:.5rem;
+            padding:1.6rem; cursor:pointer; text-align:left;
+            transition:transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .card:hover { transform:translateY(-5px); border-color:var(--primary); box-shadow:0 10px 24px rgba(29,95,138,.12); }
+        .card h3 { font-size:1.35rem; margin-bottom:.4rem; color:var(--primary-dark); }
+        .card p { font-size:.92rem; color:#4d5b68; }
+        .card .see-more { display:block; margin-top:.8rem; font-size:.82rem; font-weight:700; color:var(--primary); }
+
+        .why-section { background:var(--secondary); }
+        .why-list { display:flex; flex-direction:column; gap:1.4rem; max-width:640px; }
+        .why-item { display:flex; gap:1rem; align-items:flex-start; }
+        .why-num {
+            flex-shrink:0; width:2.4rem; height:2.4rem; border-radius:50%;
+            background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center;
+            font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem;
+        }
+
+        form { max-width:440px; }
+        .field { margin-bottom:1.1rem; }
+        .field label { display:block; font-size:.85rem; font-weight:700; margin-bottom:.35rem; color:#4d5b68; }
+        .field input, .field select {
+            width:100%; padding:.7rem .8rem; border:1px solid rgba(0,0,0,.18);
+            border-radius:.35rem; font-family:inherit; font-size:1rem; background:#fff;
+        }
+        .field input:focus, .field select:focus { outline:2px solid var(--primary); border-color:var(--primary); }
+        .demo-note { font-size:.8rem; color:#8a95a0; margin-top:.6rem; }
+
+        .contact-info { display:flex; flex-direction:column; gap:.6rem; font-size:1.05rem; }
+        .contact-info strong { color:var(--primary-dark); }
+
+        footer { background:var(--ink); color:#c7cdd4; text-align:center; padding:1.6rem 1.5rem; font-size:.85rem; }
+        footer a { color:#fff; text-decoration:underline; }
+
+        .modal-overlay {
+            display:none; position:fixed; inset:0; background:rgba(10,20,30,.55);
+            z-index:100; align-items:center; justify-content:center; padding:1.5rem;
+        }
+        .modal-overlay.open { display:flex; }
+        .modal-box { background:#fff; border-radius:.6rem; max-width:440px; width:100%; padding:2rem; position:relative; }
+        .modal-box h3 { color:var(--primary-dark); font-size:1.5rem; margin-bottom:.8rem; }
+        .modal-box .item { margin-bottom:.9rem; }
+        .modal-box .item strong { display:block; font-size:1rem; font-family:'Inter',sans-serif; text-transform:none; }
+        .modal-box .item span { font-size:.88rem; color:#4d5b68; }
+        .modal-close { position:absolute; top:.9rem; right:1rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#8a95a0; line-height:1; }
+        .modal-example-note { font-size:.78rem; color:#9aa4ad; margin-top:1rem; border-top:1px solid rgba(0,0,0,.08); padding-top:.8rem; }
+
+        .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease-out, transform .6s ease-out; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        @media (max-width:720px) {
+            .nav ul { display:none; }
+            .btn-outline { margin-left:0; margin-top:.75rem; display:block; width:fit-content; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="brand">Idraulico P.A.B.</div>
+        <ul>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#perche">Perché noi</a></li>
+            <li><a href="#preventivo">Preventivo</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="section-inner hero-content">
+        <div class="eyebrow">Torino · Idraulico</div>
+        <h1>Idraulico P.A.B. di Piecoro</h1>
+        <p class="lead">Interventi idraulici rapidi e affidabili a Torino, con la cura per i dettagli di chi lavora sul territorio da anni.</p>
+        <a href="#servizi" class="btn">Vedi i servizi</a>
+        <a href="#preventivo" class="btn-outline">Richiedi un preventivo</a>
+    </div>
+</section>
+
+<section class="manifesto reveal">
+    <p>Affidabilità prima di tutto, ogni intervento</p>
+</section>
+
+<section id="servizi" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">I servizi</div>
+        <h2 class="section-title">Cosa facciamo</h2>
+        <div class="service-hint"><span class="arrow">→</span> Clicca su una carta per il dettaglio</div>
+        <div class="cards">
+            <div class="card" data-modal="urgenze">
+                <h3>Interventi urgenti</h3>
+                <p>Perdite, rotture e guasti improvvisi: assistenza rapida quando serve davvero.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="installazioni">
+                <h3>Installazioni</h3>
+                <p>Sanitari, caldaie e impianti nuovi, installati a regola d'arte.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="manutenzione">
+                <h3>Manutenzione</h3>
+                <p>Controlli periodici per evitare guasti prima che si presentino.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="perche" class="why-section reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Perché sceglierci</div>
+        <h2 class="section-title">Quello che ci contraddistingue</h2>
+        <div class="why-list">
+            <div class="why-item">
+                <div class="why-num">1</div>
+                <div>Interventi puntuali, con preventivo chiaro prima di iniziare il lavoro.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">2</div>
+                <div>Esperienza diretta sul territorio di Torino e zone limitrofe.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">3</div>
+                <div>Disponibilità per urgenze, senza sorprese sui costi.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="preventivo" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Preventivo</div>
+        <h2 class="section-title">Richiedi un preventivo</h2>
+        <form id="quote-form">
+            <div class="field">
+                <label for="name">Nome e cognome</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="field">
+                <label for="phone">Telefono</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="field">
+                <label for="type">Tipo di intervento</label>
+                <select id="type" required>
+                    <option value="urgenza">Urgenza</option>
+                    <option value="installazione">Installazione</option>
+                    <option value="manutenzione">Manutenzione</option>
+                    <option value="altro">Altro</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Invia richiesta</button>
+            <p class="demo-note">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+        </form>
+    </div>
+</section>
+
+<section id="contatti" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Contatti</div>
+        <h2 class="section-title">Dove e come contattarci</h2>
+        <div class="contact-info">
+            <div><strong>Indirizzo:</strong> Via Sant'Antonino, 7, 10139 Torino TO</div>
+            <div><strong>Telefono:</strong> <a href="tel:+393394484584">339 448 4584</a></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Idraulico P.A.B. di Piecoro &middot; Torino<br>
+    Anteprima realizzata da Simone Deangelis &middot; <a href="tel:+393517819937">+39 351 781 9937</a>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" id="modal-close" aria-label="Chiudi">&times;</button>
+        <div id="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    var serviceDetails = {
+        urgenze: {
+            title: "Interventi urgenti",
+            items: [
+                ["Perdite d'acqua", "Individuazione e riparazione rapida."],
+                ["Tubature rotte", "Sostituzione o riparazione in giornata."],
+                ["Scarichi otturati", "Sblocco con attrezzatura professionale."]
+            ]
+        },
+        installazioni: {
+            title: "Installazioni",
+            items: [
+                ["Sanitari nuovi", "Installazione di lavandini, WC, docce."],
+                ["Caldaie", "Sostituzione e messa in funzione."],
+                ["Impianti idraulici", "Da progetto, per nuove costruzioni o ristrutturazioni."]
+            ]
+        },
+        manutenzione: {
+            title: "Manutenzione",
+            items: [
+                ["Controllo impianti", "Verifica periodica per prevenire guasti."],
+                ["Pulizia scarichi", "Manutenzione preventiva delle tubature."],
+                ["Revisione caldaia", "Controllo annuale di funzionamento e sicurezza."]
+            ]
+        }
+    };
+
+    var overlay = document.getElementById('modal-overlay');
+    var modalContent = document.getElementById('modal-content');
+    var hint = document.querySelector('.service-hint');
+
+    function openModal(key) {
+        var data = serviceDetails[key];
+        if (!data) return;
+        var html = '<h3>' + data.title + '</h3>';
+        data.items.forEach(function (d) {
+            html += '<div class="item"><strong>' + d[0] + '</strong><span>' + d[1] + '</span></div>';
+        });
+        html += '<div class="modal-example-note">Esempio dimostrativo — i servizi reali verranno definiti insieme a voi.</div>';
+        modalContent.innerHTML = html;
+        overlay.classList.add('open');
+        if (hint) { hint.style.display = 'none'; }
+    }
+
+    document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            openModal(card.getAttribute('data-modal'));
+        });
+    });
+    document.getElementById('modal-close').addEventListener('click', function () {
+        overlay.classList.remove('open');
+    });
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) { overlay.classList.remove('open'); }
+    });
+
+    document.getElementById('quote-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Grazie! Ti contatteremo a breve per il preventivo.');
+        this.reset();
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+</body>
+</html>
