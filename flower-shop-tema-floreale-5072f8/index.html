@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Flower Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6f7d4a;
+            --primary-dark: #4c5732;
+            --accent: #d98b93;
+            --secondary: #f3f0e6;
+            --ink: #302c24;
+            --paper: #fffdf8;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Nunito Sans',sans-serif;
+            color:var(--ink);
+            background:var(--paper);
+            line-height:1.65;
+        }
+        a { color:inherit; text-decoration:none; }
+        h1,h2,h3 { font-family:'Cormorant Garamond',serif; }
+
+        header { position:sticky; top:0; z-index:50; background:var(--paper); border-bottom:1px solid rgba(0,0,0,.08); }
+        .nav { max-width:1160px; margin:auto; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; }
+        .nav .brand { font-size:1.5rem; font-weight:700; color:var(--primary-dark); }
+        .nav ul { list-style:none; display:flex; gap:2rem; }
+        .nav a { font-weight:600; font-size:.95rem; transition:color .25s; }
+        .nav a:hover { color:var(--primary); }
+
+        section { padding:5rem 1.5rem; position:relative; overflow:hidden; }
+        .section-inner { max-width:1160px; margin:auto; }
+        .eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:.78rem; font-weight:700; color:var(--primary); margin-bottom:.6rem; }
+        .section-title { font-size:2.2rem; margin-bottom:2.2rem; max-width:540px; }
+
+        .hero { background:var(--secondary); padding-top:6rem; padding-bottom:6rem; }
+        .hero .deco-flower { position:absolute; z-index:0; }
+        .hero .deco-flower.f1 { top:-2rem; right:-1rem; width:220px; opacity:.55; }
+        .hero .deco-flower.f2 { bottom:-3rem; right:14%; width:140px; opacity:.4; transform:rotate(-18deg); }
+        .hero .deco-flower.f3 { bottom:2rem; left:-3rem; width:170px; opacity:.35; transform:rotate(25deg); }
+        .section-title-deco { display:inline-block; vertical-align:middle; margin-left:.5rem; opacity:.7; }
+        .hero-content { position:relative; z-index:1; max-width:600px; }
+        .hero h1 { font-size:clamp(2.4rem,5vw,3.8rem); line-height:1.06; color:var(--primary-dark); margin-bottom:1rem; }
+        .hero p.lead { font-size:1.15rem; color:#4c4636; margin-bottom:2rem; max-width:460px; }
+        .btn { display:inline-block; background:var(--primary); color:#fff; padding:.85rem 1.7rem; border-radius:.4rem; font-weight:700; border:none; cursor:pointer; font-size:1rem; transition:background .25s, transform .25s; }
+        .btn:hover { background:var(--primary-dark); transform:translateY(-2px); }
+        .btn-outline { display:inline-block; background:transparent; color:var(--primary-dark); padding:.85rem 1.7rem; border-radius:.4rem; font-weight:700; border:2px solid var(--primary-dark); cursor:pointer; font-size:1rem; margin-left:.75rem; transition:background .25s, color .25s; }
+        .btn-outline:hover { background:var(--primary-dark); color:#fff; }
+
+        .manifesto { background:var(--primary-dark); color:#fff; text-align:center; padding:3.2rem 1.5rem; }
+        .manifesto p { font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-style:italic; max-width:760px; margin:auto; }
+
+        .service-hint { display:inline-flex; align-items:center; gap:.4rem; font-size:.85rem; font-weight:700; color:var(--primary); background:#fff; border:1px solid var(--primary); border-radius:2rem; padding:.35rem .9rem; margin-bottom:1.6rem; animation:pulse 1.8s ease-in-out infinite; }
+        .service-hint .arrow { display:inline-block; animation:bounce 1.2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
+        @keyframes bounce { 0%,100%{transform:translateX(0);} 50%{transform:translateX(4px);} }
+
+        .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .card { background:#fff; border:1px solid rgba(0,0,0,.09); border-radius:.6rem; padding:1.6rem; cursor:pointer; text-align:left; transition:transform .25s, border-color .25s, box-shadow .25s; }
+        .card:hover { transform:translateY(-5px); border-color:var(--primary); box-shadow:0 10px 24px rgba(111,125,74,.14); }
+        .card h3 { font-size:1.3rem; margin-bottom:.4rem; color:var(--primary-dark); }
+        .card p { font-size:.92rem; color:#5a5646; }
+        .card .see-more { display:block; margin-top:.8rem; font-size:.82rem; font-weight:700; color:var(--primary); }
+
+        .why-section { background:var(--secondary); }
+        .why-list { display:flex; flex-direction:column; gap:1.4rem; max-width:640px; }
+        .why-item { display:flex; gap:1rem; align-items:flex-start; }
+        .why-num { flex-shrink:0; width:2.4rem; height:2.4rem; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.2rem; }
+
+        form { max-width:440px; }
+        .field { margin-bottom:1.1rem; }
+        .field label { display:block; font-size:.85rem; font-weight:700; margin-bottom:.35rem; color:#5a5646; }
+        .field input, .field select { width:100%; padding:.7rem .8rem; border:1px solid rgba(0,0,0,.18); border-radius:.4rem; font-family:inherit; font-size:1rem; background:#fff; }
+        .field input:focus, .field select:focus { outline:2px solid var(--primary); border-color:var(--primary); }
+        .demo-note { font-size:.8rem; color:#9a9280; margin-top:.6rem; }
+
+        .contact-info { display:flex; flex-direction:column; gap:.6rem; font-size:1.05rem; }
+        .contact-info strong { color:var(--primary-dark); }
+
+        footer { background:var(--ink); color:#d6d0c2; text-align:center; padding:1.6rem 1.5rem; font-size:.85rem; }
+        footer a { color:#fff; text-decoration:underline; }
+
+        .modal-overlay { display:none; position:fixed; inset:0; background:rgba(30,26,15,.55); z-index:100; align-items:center; justify-content:center; padding:1.5rem; }
+        .modal-overlay.open { display:flex; }
+        .modal-box { background:#fff; border-radius:.7rem; max-width:440px; width:100%; padding:2rem; position:relative; }
+        .modal-box h3 { color:var(--primary-dark); font-size:1.4rem; margin-bottom:.8rem; }
+        .modal-box .item { margin-bottom:.9rem; }
+        .modal-box .item strong { display:block; font-size:1rem; font-family:'Nunito Sans',sans-serif; }
+        .modal-box .item span { font-size:.88rem; color:#5a5646; }
+        .modal-close { position:absolute; top:.9rem; right:1rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:#9a9280; line-height:1; }
+        .modal-example-note { font-size:.78rem; color:#a89f8c; margin-top:1rem; border-top:1px solid rgba(0,0,0,.08); padding-top:.8rem; }
+
+        .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease-out, transform .6s ease-out; }
+        .reveal.visible { opacity:1; transform:none; }
+
+        @media (max-width:720px) {
+            .nav ul { display:none; }
+            .btn-outline { margin-left:0; margin-top:.75rem; display:block; width:fit-content; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="brand">Flower Shop</div>
+        <ul>
+            <li><a href="#servizi">Proposte</a></li>
+            <li><a href="#perche">Perché noi</a></li>
+            <li><a href="#ordina">Ordina</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+    <svg class="deco-flower f1" viewBox="0 0 100 100">
+        <g fill="var(--accent)">
+            <ellipse cx="50" cy="30" rx="11" ry="19"/>
+            <ellipse cx="50" cy="30" rx="11" ry="19" transform="rotate(72 50 50)"/>
+            <ellipse cx="50" cy="30" rx="11" ry="19" transform="rotate(144 50 50)"/>
+            <ellipse cx="50" cy="30" rx="11" ry="19" transform="rotate(216 50 50)"/>
+            <ellipse cx="50" cy="30" rx="11" ry="19" transform="rotate(288 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="7" fill="var(--primary)"/>
+    </svg>
+    <svg class="deco-flower f2" viewBox="0 0 100 100">
+        <g fill="var(--primary)">
+            <ellipse cx="50" cy="32" rx="9" ry="16"/>
+            <ellipse cx="50" cy="32" rx="9" ry="16" transform="rotate(60 50 50)"/>
+            <ellipse cx="50" cy="32" rx="9" ry="16" transform="rotate(120 50 50)"/>
+            <ellipse cx="50" cy="32" rx="9" ry="16" transform="rotate(180 50 50)"/>
+            <ellipse cx="50" cy="32" rx="9" ry="16" transform="rotate(240 50 50)"/>
+            <ellipse cx="50" cy="32" rx="9" ry="16" transform="rotate(300 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="6" fill="var(--accent)"/>
+    </svg>
+    <svg class="deco-flower f3" viewBox="0 0 60 100">
+        <path d="M30 100 V20" stroke="var(--primary)" stroke-width="3" fill="none"/>
+        <path d="M30 55 C10 45, 5 25, 20 10" stroke="var(--primary)" stroke-width="3" fill="none"/>
+        <path d="M30 75 C50 65, 55 45, 42 30" stroke="var(--primary)" stroke-width="3" fill="none"/>
+        <ellipse cx="18" cy="10" rx="10" ry="6" fill="var(--primary)" transform="rotate(-30 18 10)"/>
+        <ellipse cx="43" cy="28" rx="10" ry="6" fill="var(--primary)" transform="rotate(35 43 28)"/>
+    </svg>
+    <div class="section-inner hero-content">
+        <div class="eyebrow">Torino · Fioraio</div>
+        <h1>Flower Shop</h1>
+        <p class="lead">Composizioni floreali curate a mano per ogni occasione, nel cuore di Torino.</p>
+        <a href="#servizi" class="btn">Scopri le proposte</a>
+        <a href="#ordina" class="btn-outline">Ordina un bouquet</a>
+    </div>
+</section>
+
+<section class="manifesto reveal">
+    <p>&ldquo;Ogni fiore racconta qualcosa: noi lo aiutiamo a dirlo bene.&rdquo;</p>
+</section>
+
+<section id="servizi" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Le proposte</div>
+        <h2 class="section-title">Cosa possiamo preparare <svg class="section-title-deco" width="20" height="20" viewBox="0 0 100 100"><g fill="var(--accent)"><ellipse cx="50" cy="32" rx="12" ry="20"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="8" fill="var(--primary)"/></svg></h2>
+        <div class="service-hint"><span class="arrow">→</span> Clicca su una carta per il dettaglio</div>
+        <div class="cards">
+            <div class="card" data-modal="bouquet">
+                <h3>Bouquet</h3>
+                <p>Composizioni fresche per ogni occasione, personalizzabili su richiesta.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="eventi">
+                <h3>Eventi</h3>
+                <p>Allestimenti floreali per matrimoni, cerimonie e ricorrenze.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+            <div class="card" data-modal="piante">
+                <h3>Piante</h3>
+                <p>Piante da interno ed esterno, con consigli di cura inclusi.</p>
+                <span class="see-more">Vedi qualche esempio →</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="perche" class="why-section reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Perché sceglierci</div>
+        <h2 class="section-title">Quello che ci contraddistingue <svg class="section-title-deco" width="20" height="20" viewBox="0 0 100 100"><g fill="var(--accent)"><ellipse cx="50" cy="32" rx="12" ry="20"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="8" fill="var(--primary)"/></svg></h2>
+        <div class="why-list">
+            <div class="why-item">
+                <div class="why-num">1</div>
+                <div>Fiori freschi selezionati con cura, rinnovati regolarmente.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">2</div>
+                <div>Composizioni personalizzate in base a occasione e budget.</div>
+            </div>
+            <div class="why-item">
+                <div class="why-num">3</div>
+                <div>Un servizio curato nei dettagli, dal primo contatto alla consegna.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="ordina" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Ordina</div>
+        <h2 class="section-title">Richiedi un bouquet <svg class="section-title-deco" width="20" height="20" viewBox="0 0 100 100"><g fill="var(--accent)"><ellipse cx="50" cy="32" rx="12" ry="20"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="8" fill="var(--primary)"/></svg></h2>
+        <form id="order-form">
+            <div class="field">
+                <label for="name">Nome e cognome</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="field">
+                <label for="date">Data desiderata</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="field">
+                <label for="occasion">Occasione</label>
+                <select id="occasion" required>
+                    <option value="compleanno">Compleanno</option>
+                    <option value="matrimonio">Matrimonio</option>
+                    <option value="condoglianze">Condoglianze</option>
+                    <option value="altro">Altro</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Invia richiesta</button>
+            <p class="demo-note">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+        </form>
+    </div>
+</section>
+
+<section id="contatti" class="reveal">
+    <div class="section-inner">
+        <div class="eyebrow">Contatti</div>
+        <h2 class="section-title">Dove trovarci <svg class="section-title-deco" width="20" height="20" viewBox="0 0 100 100"><g fill="var(--accent)"><ellipse cx="50" cy="32" rx="12" ry="20"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(72 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(144 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(216 50 50)"/><ellipse cx="50" cy="32" rx="12" ry="20" transform="rotate(288 50 50)"/></g><circle cx="50" cy="50" r="8" fill="var(--primary)"/></svg></h2>
+        <div class="contact-info">
+            <div><strong>Indirizzo:</strong> Corso Bernardino Telesio, 32b, 10146 Torino TO</div>
+            <div><strong>Telefono:</strong> <a href="tel:+393204181364">320 418 1364</a></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Flower Shop &middot; Torino<br>
+    Anteprima realizzata da Simone Deangelis &middot; <a href="tel:+393517819937">+39 351 781 9937</a>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" id="modal-close" aria-label="Chiudi">&times;</button>
+        <div id="modal-content"></div>
+    </div>
+</div>
+
+<script>
+    var serviceDetails = {
+        bouquet: {
+            title: "Bouquet",
+            items: [
+                ["Bouquet di stagione", "Fiori freschi selezionati in base alla stagionalità."],
+                ["Bouquet romantico", "Rose e fiori delicati per occasioni speciali."],
+                ["Composizione elegante", "Un mix curato di fiori e verde per ogni ambiente."]
+            ]
+        },
+        eventi: {
+            title: "Eventi",
+            items: [
+                ["Allestimento matrimonio", "Composizioni per cerimonia e ricevimento."],
+                ["Centrotavola", "Realizzati su misura in base al tema dell'evento."],
+                ["Addobbi cerimonia", "Archi floreali e decorazioni per la location."]
+            ]
+        },
+        piante: {
+            title: "Piante",
+            items: [
+                ["Piante da interno", "Selezione di piante facili da curare in casa."],
+                ["Piante da esterno", "Ideali per balconi e giardini."],
+                ["Consigli di cura", "Un supporto per mantenere le piante in salute."]
+            ]
+        }
+    };
+
+    var overlay = document.getElementById('modal-overlay');
+    var modalContent = document.getElementById('modal-content');
+    var hint = document.querySelector('.service-hint');
+
+    function openModal(key) {
+        var data = serviceDetails[key];
+        if (!data) return;
+        var html = '<h3>' + data.title + '</h3>';
+        data.items.forEach(function (d) {
+            html += '<div class="item"><strong>' + d[0] + '</strong><span>' + d[1] + '</span></div>';
+        });
+        html += '<div class="modal-example-note">Esempio dimostrativo — le proposte reali verranno definite insieme a voi.</div>';
+        modalContent.innerHTML = html;
+        overlay.classList.add('open');
+        if (hint) { hint.style.display = 'none'; }
+    }
+
+    document.querySelectorAll('.card').forEach(function (card) {
+        card.addEventListener('click', function () {
+            openModal(card.getAttribute('data-modal'));
+        });
+    });
+    document.getElementById('modal-close').addEventListener('click', function () {
+        overlay.classList.remove('open');
+    });
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) { overlay.classList.remove('open'); }
+    });
+
+    document.getElementById('order-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Grazie! Ti contatteremo a breve per confermare l\'ordine.');
+        this.reset();
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+</script>
+
+</body>
+</html>
