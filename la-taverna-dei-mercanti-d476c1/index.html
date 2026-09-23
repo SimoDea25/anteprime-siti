@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>La Taverna Dei Mercanti – Anteprima Sito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B3E2F;
+            --secondary: #D9C5A1;
+            --bg-light: #F2E8DF;
+            --text-dark: #2E2E2E;
+            --transition: 0.4s ease;
+        }
+        * { box-sizing: border-box; margin:0; padding:0; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: #fff;
+            overflow-x: hidden;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; margin-bottom: .5rem; }
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--bg-light);
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,.1);
+        }
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        .logo { font-size: 1.4rem; font-weight: 600; color: var(--primary); }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { font-weight: 500; transition: color var(--transition); }
+        .nav-links a:hover { color: var(--secondary); }
+        /* HERO */
+        .hero {
+            position: relative;
+            padding: 4rem 1rem;
+            background: var(--bg-light);
+            overflow: hidden;
+        }
+        .hero::before,
+        .hero::after {
+            content:"";
+            position:absolute;
+            border-radius:50%;
+            background: var(--primary);
+            filter:blur(120px);
+            opacity:0.15;
+        }
+        .hero::before{
+            width:300px;height:300px;
+            top:-80px; left:-120px;
+        }
+        .hero::after{
+            width:400px;height:400px;
+            bottom:-150px; right:-180px;
+            background: var(--secondary);
+        }
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            color: var(--primary);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin: 1rem 0 2rem;
+        }
+        .btn {
+            display:inline-block;
+            padding: .8rem 1.6rem;
+            background: var(--primary);
+            color:#fff;
+            border:none;
+            border-radius:4px;
+            font-weight:600;
+            cursor:pointer;
+            transition: background var(--transition), transform var(--transition);
+        }
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        section { padding: 4rem 1rem; }
+        .section-title {
+            text-align:center;
+            margin-bottom:2rem;
+            font-size:2.4rem;
+            color: var(--primary);
+        }
+        .grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+            gap:1.5rem;
+            max-width:1100px;
+            margin:0 auto;
+        }
+        .card {
+            border:1px solid var(--secondary);
+            padding:1.5rem;
+            border-radius:6px;
+            background:#fff;
+            transition: border-color var(--transition);
+        }
+        .card:hover { border-color: var(--primary); }
+        .card h3 { margin-bottom:.5rem; }
+        .claim {
+            background: var(--primary);
+            color:#fff;
+            text-align:center;
+            padding:3rem 1rem;
+            font-size:2rem;
+        }
+        .contact-info {
+            max-width:600px;
+            margin:0 auto;
+            font-size:1.1rem;
+        }
+        .contact-item {
+            display:flex;
+            align-items:center;
+            margin:0.8rem 0;
+        }
+        .contact-item svg { width:24px; height:24px; margin-right:0.6rem; fill:var(--primary);}
+        .form {
+            margin-top:2rem;
+            display:flex;
+            flex-direction:column;
+            gap:0.8rem;
+        }
+        .form input, .form textarea {
+            padding:0.6rem;
+            border:1px solid #ccc;
+            border-radius:4px;
+            font-family:inherit;
+        }
+        .form button {
+            align-self:flex-start;
+            margin-top:0.4rem;
+        }
+        footer {
+            background: var(--bg-light);
+            padding:1.5rem;
+            text-align:center;
+            font-size:.9rem;
+        }
+        /* Fade-in animation */
+        .fade {
+            opacity:0;
+            transform:translateY(20px);
+            transition: opacity var(--transition), transform var(--transition);
+        }
+        .fade.visible { opacity:1; transform:none; }
+        /* Responsive */
+        @media (max-width:600px){
+            .hero h1{font-size:2.8rem;}
+            nav{flex-direction:column; gap:.5rem;}
+            .nav-links{gap:1rem;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">La Taverna Dei Mercanti</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menù</a>
+                <a href="#why">Perché Sceglierci</a>
+                <a href="#contact">Contatti</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content fade">
+            <h1>La Taverna Dei Mercanti</h1>
+            <p>Cucina tradizionale torinese in un’atmosfera accogliente e familiare.</p>
+            <a href="#menu" class="btn">Scopri il nostro Menù</a>
+        </div>
+    </section>
+
+    <section id="menu" style="background:var(--bg-light);">
+        <h2 class="section-title fade">Il Nostro Menù</h2>
+        <div class="grid">
+            <div class="card fade">
+                <h3>Antipasti</h3>
+                <p>Selezione di bruschette, crostini e specialità di salumi locali.</p>
+            </div>
+            <div class="card fade">
+                <h3>Primi</h3>
+                <p>Tagliatelle al ragù, agnolotti del plin e risotto allo zafferano.</p>
+            </div>
+            <div class="card fade">
+                <h3>Secondi</h3>
+                <p>Carne alla griglia, brasato al Barolo e pesce del giorno.</p>
+            </div>
+            <div class="card fade">
+                <h3>Dolci</h3>
+                <p>Tiramisù, panna cotta e dolci della tradizione piemontese.</p>
+            </div>
+            <div class="card fade">
+                <h3>Vini</h3>
+                <p>Scelta di vini rossi, bianchi e locali per accompagnare ogni portata.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="why" style="background:var(--secondary);">
+        <h2 class="section-title fade">Perché Sceglierci</h2>
+        <div class="grid">
+            <div class="card fade">
+                <h3>Ingredienti locali</h3>
+                <p>Solo materie prime selezionate da produttori del territorio.</p>
+            </div>
+            <div class="card fade">
+                <h3>Accoglienza familiare</h3>
+                <p>Un servizio attento e cordiale, come a casa propria.</p>
+            </div>
+            <div class="card fade">
+                <h3>Posizione centrale</h3>
+                <p>Nel cuore di Torino, facilmente raggiungibile con i mezzi pubblici.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="claim fade">
+        Il gusto della tradizione, nel cuore di Torino
+    </section>
+
+    <section id="contact" style="background:var(--bg-light);">
+        <h2 class="section-title fade">Contatti</h2>
+        <div class="contact-info fade">
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                Via Santa Chiara, 13, 10122 Torino TO, Italy
+            </div>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.11-.21c1.21.49 2.53.76 3.89.76a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 3.5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.36.26 2.68.76 3.89a1.003 1.003 0 01-.21 1.11l-2.43 2.29z"/></svg>
+                <a href="tel:0115212017">011 521 2017</a>
+            </div>
+            <form class="form fade" id="demoForm">
+                <label for="name">Nome</label>
+                <input type="text" id="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+                <label for="message">Messaggio</label>
+                <textarea id="message" rows="3"></textarea>
+                <button type="submit" class="btn">Invia Richiesta</button>
+                <small>(demo dimostrativa, i dati inseriti qui non vengono salvati)</small>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        La Taverna Dei Mercanti – Via Santa Chiara, 13 – 011 521 2017
+    </footer>
+
+    <script>
+        // IntersectionObserver per fade-in
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {threshold:0.1});
+
+        document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+        // Demo form handler
+        document.getElementById('demoForm').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Grazie! Ti contatteremo a breve.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
