@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Ares Parrucchieri – Anteprima sito web</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary:#006d77;          /* teal */
+    --secondary:#e29578;        /* soft coral */
+    --bg-light:#f5f5f5;
+    --text-dark:#222;
+    --text-light:#fff;
+    --radius:8px;
+    --transition:0.3s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+    font-family:'Roboto',sans-serif;
+    color:var(--text-dark);
+    background:var(--bg-light);
+    line-height:1.6;
+}
+header{
+    background:var(--primary);
+    padding:0.8rem 2rem;
+    position:sticky;top:0;z-index:10;
+}
+nav{
+    max-width:1200px;margin:auto;
+    display:flex;justify-content:space-between;align-items:center;
+}
+nav a{
+    color:var(--text-light);
+    text-decoration:none;
+    margin:0 0.8rem;
+    font-weight:500;
+    position:relative;
+}
+nav a::after{
+    content:"";
+    position:absolute;
+    width:0%;height:2px;background:var(--secondary);
+    left:0;bottom:-4px;transition:width var(--transition);
+}
+nav a:hover::after{width:100%;}
+section{
+    max-width:1200px;margin:auto;padding:4rem 2rem;
+    opacity:0;transform:translateY(30px);transition:opacity 0.6s var(--transition),transform 0.6s var(--transition);
+}
+section.visible{opacity:1;transform:none;}
+#hero{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:var(--text-light);
+    position:relative;
+    overflow:hidden;
+}
+#hero .content{
+    max-width:600px;
+}
+#hero h1{
+    font-family:'Montserrat',sans-serif;
+    font-size:4.5rem;
+    margin-bottom:0.5rem;
+}
+#hero p{
+    font-size:1.2rem;margin-bottom:1.5rem;
+}
+#hero button{
+    background:var(--text-light);
+    color:var(--primary);
+    border:none;
+    padding:0.8rem 1.5rem;
+    font-weight:600;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:background var(--transition);
+}
+#hero button:hover{
+    background:#e0e0e0;
+}
+#hero svg.decor{
+    position:absolute;
+    width:400px;height:400px;
+    top:50%;right:-100px;
+    transform:translateY(-50%) rotate(20deg);
+    opacity:0.08;
+}
+#servizi .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+}
+.card{
+    background:#fff;
+    border:2px solid var(--primary);
+    border-radius:var(--radius);
+    padding:1.5rem;
+    cursor:pointer;
+    position:relative;
+    transition:background var(--transition),border-color var(--transition);
+}
+.card:hover{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--secondary);
+}
+.card h3{
+    margin-bottom:0.5rem;
+    font-family:'Montserrat',sans-serif;
+}
+.badge{
+    position:absolute;top:-10px;right:-10px;
+    background:var(--secondary);
+    color:#fff;
+    font-size:0.75rem;
+    padding:0.2rem 0.5rem;
+    border-radius:12px;
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+#perche ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+}
+#perche li{
+    background:#fff;
+    border-left:4px solid var(--primary);
+    padding:1rem;
+}
+#firma{
+    background:var(--primary);
+    color:var(--text-light);
+    text-align:center;
+    padding:3rem 2rem;
+}
+#firma h2{
+    font-family:'Montserrat',sans-serif;
+    font-size:3rem;
+}
+#contatti form{
+    background:#fff;
+    padding:2rem;
+    border-radius:var(--radius);
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    max-width:500px;
+}
+#contatti label{
+    display:block;margin-bottom:0.5rem;
+}
+#contatti input, #contatti textarea{
+    width:100%;padding:0.6rem;
+    margin-bottom:1rem;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-family:inherit;
+}
+#contatti button{
+    background:var(--primary);
+    color:#fff;
+    border:none;
+    padding:0.8rem 1.2rem;
+    cursor:pointer;
+    border-radius:var(--radius);
+    transition:background var(--transition);
+}
+#contatti button:hover{
+    background:var(--secondary);
+}
+footer{
+    background:var(--text-dark);
+    color:#bbb;
+    text-align:center;
+    padding:1rem;
+    font-size:0.9rem;
+}
+.modal{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.6);
+    display:flex;justify-content:center;align-items:center;
+    opacity:0;visibility:hidden;transition:opacity var(--transition);
+}
+.modal.active{opacity:1;visibility:visible;}
+.modal-content{
+    background:#fff;
+    padding:2rem;
+    border-radius:var(--radius);
+    max-width:500px;
+    position:relative;
+}
+.modal-content h4{
+    margin-bottom:1rem;
+    font-family:'Montserrat',sans-serif;
+}
+.modal-content p{
+    margin-bottom:1rem;
+}
+.modal-content .close{
+    position:absolute;top:10px;right:10px;
+    background:none;border:none;font-size:1.2rem;cursor:pointer;
+}
+.note{
+    font-size:0.85rem;color:#666;margin-top:0.5rem;
+}
+@media (max-width:768px){
+    #hero h1{font-size:3rem;}
+    header{padding:0.6rem 1rem;}
+    nav a{margin:0 0.4rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div><strong>Ares Parrucchieri</strong></div>
+        <div>
+            <a href="#hero">Home</a>
+            <a href="#servizi">Servizi</a>
+            <a href="#perche">Perché</a>
+            <a href="#contatti">Contatti</a>
+        </div>
+    </nav>
+</header>
+
+<section id="hero">
+    <svg class="decor" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 8L52 8L52 48L12 48Z" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 20L44 20L44 36L20 36Z" fill="currentColor"/>
+        <path d="M28 44L36 44L36 48L28 48Z" fill="currentColor"/>
+        <path d="M22 12L26 12L26 16L22 16Z" fill="currentColor"/>
+        <path d="M38 12L42 12L42 16L38 16Z" fill="currentColor"/>
+        <!-- stylized scissors -->
+        <path d="M16 24C14 22 12 20 12 18C12 16 14 14 16 14C18 14 20 16 20 18C20 20 18 22 16 24Z" fill="currentColor"/>
+        <path d="M48 24C46 22 44 20 44 18C44 16 46 14 48 14C50 14 52 16 52 18C52 20 50 22 48 24Z" fill="currentColor"/>
+    </svg>
+    <div class="content">
+        <h1>Ares Parrucchieri</h1>
+        <p>Stile unico per ogni cliente. Scopri la nostra esperienza.</p>
+        <button onclick="document.getElementById('servizi').scrollIntoView({behavior:'smooth'});">Scopri i nostri servizi</button>
+    </div>
+</section>
+
+<section id="servizi">
+    <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:2rem;">I nostri servizi</h2>
+    <div class="cards">
+        <div class="card" data-modal="modal1">
+            <div class="badge">Clicca per il dettaglio</div>
+            <h3>Taglio donna</h3>
+            <p>Taglio personalizzato e consigli di stile.</p>
+        </div>
+        <div class="card" data-modal="modal2">
+            <h3>Taglio uomo</h3>
+            <p>Taglio classico o moderno, a tua scelta.</p>
+        </div>
+        <div class="card" data-modal="modal3">
+            <h3>Colore</h3>
+            <p>Trattamenti di colorazione con prodotti di alta qualità.</p>
+        </div>
+        <div class="card" data-modal="modal4">
+            <h3>Piega</h3>
+            <p>Piega professionale per ogni occasione.</p>
+        </div>
+        <div class="card" data-modal="modal5">
+            <h3>Trattamento capelli</h3>
+            <p>Rigenerazione e nutrimento per capelli sani.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Modali -->
+<div id="modal1" class="modal"><div class="modal-content"><button class="close">&times;</button><h4>Taglio donna</h4><p>Dettaglio servizio: consulenza personalizzata, lavaggio, taglio, styling finale.</p><p class="note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p></div></div>
+<div id="modal2" class="modal"><div class="modal-content"><button class="close">&times;</button><h4>Taglio uomo</h4><p>Dettaglio servizio: lavaggio, taglio, rifinitura barba opzionale.</p><p class="note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p></div></div>
+<div id="modal3" class="modal"><div class="modal-content"><button class="close">&times;</button><h4>Colore</h4><p>Dettaglio servizio: consulenza colore, applicazione prodotto, trattamento post-colore.</p><p class="note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p></div></div>
+<div id="modal4" class="modal"><div class="modal-content"><button class="close">&times;</button><h4>Piega</h4><p>Dettaglio servizio: preparazione, styling con prodotti di fissaggio, finitura.</p><p class="note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p></div></div>
+<div id="modal5" class="modal"><div class="modal-content"><button class="close">&times;</button><h4>Trattamento capelli</h4><p>Dettaglio servizio: maschera nutriente, massaggio del cuoio capelluto, risciacquo.</p><p class="note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p></div></div>
+
+<section id="perche">
+    <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:2rem;">Perché scegliere Ares</h2>
+    <ul>
+        <li><strong>Professionalità certificata:</strong> stilisti con formazione continua.</li>
+        <li><strong>Prodotti di alta qualità:</strong> solo marchi riconosciuti dal settore.</li>
+        <li><strong>Ambiente accogliente:</strong> spazio rilassante e cura del cliente.</li>
+    </ul>
+</section>
+
+<section id="firma">
+    <h2>La tua bellezza, il nostro mestiere</h2>
+</section>
+
+<section id="contatti">
+    <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:2rem;">Contatti</h2>
+    <p><strong>Indirizzo:</strong> Via Giovanni Servais 93, 7b, 10146 Torino TO, Italy</p>
+    <p><strong>Telefono:</strong> <a href="tel:0110606334">011 060 6334</a></p>
+
+    <h3 style="margin-top:2rem;">Richiedi un appuntamento (demo)</h3>
+    <form id="demoForm">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="telefono">Telefono</label>
+        <input type="tel" id="telefono" required>
+        <label for="data">Data preferita</label>
+        <input type="date" id="data" required>
+        <button type="submit">Invia</button>
+        <p class="note">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+    </form>
+</section>
+
+<footer>
+    Ares Parrucchieri
+</footer>
+
+<script>
+/* Scroll reveal */
+const observer = new IntersectionObserver((entries)=> {
+    entries.forEach(entry=> {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    });
+}, {threshold:0.1});
+document.querySelectorAll('section').forEach(sec=>observer.observe(sec));
+
+/* Card modal logic */
+document.querySelectorAll('.card').forEach(card=> {
+    card.addEventListener('click',()=>{
+        const modalId = card.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        if(modal) modal.classList.add('active');
+    });
+});
+document.querySelectorAll('.modal .close').forEach(btn=>{
+    btn.addEventListener('click',()=> btn.parentElement.parentElement.classList.remove('active'));
+});
+window.addEventListener('click', e=> {
+    if(e.target.classList.contains('modal')) e.target.classList.remove('active');
+});
+
+/* Tooltip badge removal */
+const firstBadge = document.querySelector('.badge');
+if(firstBadge){
+    const hideBadge = ()=> firstBadge.remove();
+    setTimeout(hideBadge, 5000);
+    document.querySelectorAll('.card')[0].addEventListener('click', hideBadge);
+}
+
+/* Demo form */
+document.getElementById('demoForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('Grazie! Ti contatteremo a breve.');
+    e.target.reset();
+});
+</script>
+</body>
+</html>
