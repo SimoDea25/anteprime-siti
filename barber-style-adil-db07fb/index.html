@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>BARBER STYLE ADIL – Anteprima sito</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --primary:#2c2c2c;
+    --secondary:#d4a55d;
+    --accent:#f5f5f5;
+    --bg:#ffffff;
+    --max-w:1200px;
+    --transition:0.3s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+    font-family:'Montserrat',sans-serif;
+    line-height:1.6;
+    color:#333;
+    background:var(--bg);
+}
+header{
+    background:var(--primary);
+    color:#fff;
+    position:sticky;top:0;z-index:10;
+}
+nav{
+    max-width:var(--max-w);
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem;
+}
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:1.5rem;
+}
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    transition:color var(--transition);
+}
+nav a:hover{color:var(--secondary);}
+section{padding:4rem 1rem;}
+.container{max-width:var(--max-w);margin:auto;}
+h1,h2{
+    font-family:'Playfair Display',serif;
+    margin-bottom:1rem;
+}
+h1{font-size:4rem;line-height:1.1;}
+h2{font-size:2.5rem;color:var(--primary);}
+.btn{
+    display:inline-block;
+    background:var(--secondary);
+    color:#fff;
+    padding:.75rem 1.5rem;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-weight:600;
+    text-decoration:none;
+    transition:background var(--transition);
+}
+.btn:hover{background:#b5883b;}
+/* Hero */
+.hero{
+    background:var(--primary);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+}
+.hero .content{
+    max-width:var(--max-w);
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    height:80vh;
+    padding:2rem;
+}
+.hero svg.bg-deco{
+    position:absolute;
+    top:0;right:0;
+    width:50%;
+    height:100%;
+    opacity:.1;
+}
+/* Services */
+.services{background:var(--accent);}
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+}
+.service-card{
+    border:2px solid var(--secondary);
+    padding:1.5rem;
+    cursor:pointer;
+    position:relative;
+    transition:transform var(--transition);
+}
+.service-card:hover{transform:translateY(-5px);}
+.service-card h3{
+    font-size:1.5rem;
+    margin-bottom:.5rem;
+    color:var(--primary);
+}
+.service-card .badge{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:var(--secondary);
+    color:#fff;
+    font-size:.75rem;
+    padding:2px 6px;
+    border-radius:3px;
+    display:none;
+}
+.service-card.show-badge .badge{display:block;}
+/* Why */
+.why{background:var(--bg);}
+.why-list{display:flex;flex-wrap:wrap;gap:2rem;}
+.why-item{
+    flex:1 1 250px;
+    display:flex;
+    align-items:flex-start;
+    gap:.75rem;
+}
+.why-item svg{
+    flex-shrink:0;
+    width:40px;height:40px;
+    stroke:var(--secondary);
+    stroke-width:2;
+    fill:none;
+}
+.why-item p{
+    margin:0;
+    font-weight:600;
+    color:var(--primary);
+}
+/* Claim */
+.claim{
+    background:var(--secondary);
+    color:#fff;
+    text-align:center;
+    padding:3rem 1rem;
+}
+.claim h2{
+    font-size:3rem;
+    margin:0;
+}
+/* Contact */
+.contact{background:var(--bg);}
+.contact .info{
+    font-size:1.1rem;
+    line-height:1.8;
+}
+form{
+    margin-top:2rem;
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    max-width:400px;
+}
+input,button{
+    padding:.75rem;
+    border:1px solid #ccc;
+    border-radius:4px;
+    font-family:inherit;
+}
+button{background:var(--primary);color:#fff;border:none;cursor:pointer;transition:background var(--transition);}
+button:hover{background:#1a1a1a;}
+footer{
+    background:#111;
+    color:#ccc;
+    text-align:center;
+    padding:1rem;
+    font-size:.9rem;
+}
+.fade-in{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity .6s ease-out, transform .6s ease-out;
+}
+.visible{opacity:1;transform:none;}
+/* Modal */
+.modal{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,.6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .3s ease;
+}
+.modal.active{
+    opacity:1;
+    visibility:visible;
+}
+.modal-content{
+    background:#fff;
+    padding:2rem;
+    max-width:500px;
+    border-radius:8px;
+    position:relative;
+}
+.modal-content h3{margin-top:0;color:var(--primary);}
+.modal-content .close{
+    position:absolute;
+    top:10px;right:10px;
+    background:none;
+    border:none;
+    font-size:1.5rem;
+    cursor:pointer;
+}
+@media(max-width:768px){
+    h1{font-size:3rem;}
+    .hero .content{height:auto;padding:4rem 2rem;}
+}
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo"><strong>BARBER STYLE ADIL</strong></div>
+    <ul>
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#services">Servizi</a></li>
+      <li><a href="#why">Perché</a></li>
+      <li><a href="#contact">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="hero" class="hero">
+  <svg class="bg-deco" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#d4a55d"/>
+        <stop offset="100%" stop-color="#2c2c2c"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,0 L200,0 L200,400 L0,400 Z" fill="url(#grad)"/>
+    <path d="M100,0 L100,400" stroke="#fff" stroke-width="30" stroke-dasharray="40 20"/>
+  </svg>
+  <div class="content fade-in">
+    <h1>BARBER STYLE ADIL</h1>
+    <p style="font-size:1.25rem;margin-bottom:1.5rem;">Barberia tradizionale nel cuore di Torino</p>
+    <a href="#contact" class="btn">Prenota ora</a>
+  </div>
+</section>
+
+<section id="services" class="services fade-in">
+  <div class="container">
+    <h2>Servizi</h2>
+    <div class="service-grid">
+      <div class="service-card" data-id="1"><span class="badge">Demo</span>
+        <h3>Taglio Classico</h3>
+        <p>Rifinitura perfetta con attenzione ai dettagli.</p>
+      </div>
+      <div class="service-card" data-id="2"><span class="badge">Demo</span>
+        <h3>Barba</h3>
+        <p>Definizione e cura della barba con prodotti di qualità.</p>
+      </div>
+      <div class="service-card" data-id="3"><span class="badge">Demo</span>
+        <h3>Rasatura a Caldo</h3>
+        <p>Esperienza tradizionale per una pelle liscia.</p>
+      </div>
+      <div class="service-card" data-id="4"><span class="badge">Demo</span>
+        <h3>Colorazione Barba</h3>
+        <p>Ritocchi di colore per un look sempre curato.</p>
+      </div>
+      <div class="service-card" data-id="5"><span class="badge">Demo</span>
+        <h3>Trattamento Viso</h3>
+        <p>Rilassante trattamento per una pelle sana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why fade-in">
+  <div class="container">
+    <h2>Perché sceglierci</h2>
+    <div class="why-list">
+      <div class="why-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5v3h2a1 1 0 011 1v9a1 1 0 01-1 1h-4v-5h-4v5H6a1 1 0 01-1-1v-9a1 1 0 011-1h2V7a5 5 0 015-5z"/></svg>
+        <p>Professionalità certificata</p>
+      </div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <p>Atmosfera accogliente</p>
+      </div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        <p>Prodotti di alta qualità</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="claim fade-in">
+  <h2>Il tuo stile, la nostra passione.</h2>
+</section>
+
+<section id="contact" class="contact fade-in">
+  <div class="container">
+    <h2>Contatti</h2>
+    <div class="info">
+      <p><strong>Indirizzo:</strong> Corso Monte Grappa, 96/B, 10145 Torino TO, Italy</p>
+      <p><strong>Telefono:</strong> 327 978 4470</p>
+    </div>
+    <form id="apptForm">
+      <input type="text" id="name" placeholder="Il tuo nome" required>
+      <input type="tel" id="phone" placeholder="Il tuo numero" required>
+      <input type="date" id="date" required>
+      <button type="submit" class="btn">Richiedi appuntamento</button>
+    </form>
+    <p style="font-size:.85rem;margin-top:.5rem;color:#777;">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+  </div>
+</section>
+
+<footer>
+  BARBER STYLE ADIL
+</footer>
+
+<!-- Modal Template -->
+<div id="modal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close" aria-label="Chiudi">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <p id="modalBody"></p>
+    <p style="font-size:.85rem;color:#555;margin-top:1rem;">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p>
+  </div>
+</div>
+
+<script>
+// IntersectionObserver for fade-in
+document.addEventListener('DOMContentLoaded',()=>{ 
+  const faders=document.querySelectorAll('.fade-in');
+  const options={threshold:0.1};
+  const observer=new IntersectionObserver((entries,obs)=>{ 
+    entries.forEach(entry=>{ 
+      if(entry.isIntersecting){ entry.target.classList.add('visible'); obs.unobserve(entry.target);}
+    });
+  },options);
+  faders.forEach(el=>observer.observe(el));
+});
+
+// Modal handling
+const services = [
+  {id:1,title:"Taglio Classico",body:"Dettaglio del servizio di taglio classico: consulenza personalizzata, utilizzo di forbici e macchinette professionali, finitura con prodotti per la cura dei capelli. <br><small>(Esempio dimostrativo)</small>"},
+  {id:2,title:"Barba",body:"Cura completa della barba: modellatura, rifinitura dei bordi, utilizzo di oli nutrienti per una barba morbida e lucida. <br><small>(Esempio dimostrativo)</small>"},
+  {id:3,title:"Rasatura a Caldo",body:"Rasatura tradizionale con panno caldo, crema da barba ricca e lametta di precisione per una pelle perfettamente liscia. <br><small>(Esempio dimostrativo)</small>"},
+  {id:4,title:"Colorazione Barba",body:"Trattamento di colorazione per coprire i capelli bianchi o per un look più definito, con prodotti a base di pigmenti naturali. <br><small>(Esempio dimostrativo)</small>"},
+  {id:5,title:"Trattamento Viso",body:"Massaggio rilassante e trattamento idratante per il viso, adatto a tutti i tipi di pelle. <br><small>(Esempio dimostrativo)</small>"}
+];
+document.querySelectorAll('.service-card').forEach(card=>{ 
+  card.addEventListener('click',()=>{ 
+    const id=card.dataset.id;
+    const data=services.find(s=>s.id==id);
+    document.getElementById('modalTitle').innerHTML=data.title;
+    document.getElementById('modalBody').innerHTML=data.body;
+    document.getElementById('modal').classList.add('active');
+    // hide tooltip badge after first click
+    card.classList.remove('show-badge');
+  });
+});
+// Show tooltip badge on first load for first card only
+document.querySelector('.service-card').classList.add('show-badge');
+
+document.querySelector('.modal .close').addEventListener('click',()=>{ 
+  document.getElementById('modal').classList.remove('active');
+});
+document.getElementById('modal').addEventListener('click',e=>{ 
+  if(e.target===e.currentTarget) document.getElementById('modal').classList.remove('active');
+});
+
+// Form demo
+document.getElementById('apptForm').addEventListener('submit',e=>{ 
+  e.preventDefault();
+  alert('Grazie! Ti contatteremo a breve.');
+  e.target.reset();
+});
+</script>
+</body>
+</html>
