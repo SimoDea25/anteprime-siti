@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bakery 148 – Anteprima sito web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:#A85C40;
+      --secondary:#F5E9D3;
+      --accent:#E07A5F;
+      --text:#333;
+      --bg:#fff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Montserrat',sans-serif;
+      line-height:1.6;
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:var(--primary);text-decoration:none}
+    header{
+      position:sticky;top:0;background:var(--bg);z-index:10;
+      box-shadow:0 2px 4px rgba(0,0,0,0.05);
+    }
+    nav{
+      max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;
+    }
+    .logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--primary);}
+    .nav-links{display:flex;gap:1.5rem;}
+    .nav-links a{font-weight:500;transition:color .3s;}
+    .nav-links a:hover{color:var(--accent);}
+    .section{padding:4rem 1rem;}
+    .hero{
+      background:linear-gradient(135deg,var(--primary) 0%, var(--accent) 100%);
+      color:#fff;position:relative;overflow:hidden;
+    }
+    .hero .container{max-width:1100px;margin:auto;display:flex;flex-direction:column;justify-content:center;height:80vh;}
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:4rem;
+      line-height:1.1;
+      margin-bottom:.5rem;
+    }
+    .hero p{
+      font-size:1.25rem;
+      margin-bottom:1.5rem;
+    }
+    .hero .cta{
+      display:inline-block;background:#fff;color:var(--primary);
+      padding:.8rem 1.6rem;border-radius:4px;font-weight:600;
+      transition:background .3s,transform .2s;
+    }
+    .hero .cta:hover{background:#f0f0f0;transform:translateY(-2px);}
+    .hero svg.bg-wheat{
+      position:absolute;top:20%;right:-10%;width:500px;height:auto;opacity:.15;
+    }
+    .services,.why,.contact{background:var(--secondary);}
+    .services .grid,.why .grid{
+      max-width:1100px;margin:auto;display:grid;gap:1.5rem;
+    }
+    .services .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+    .card{
+      border:2px solid var(--primary);
+      padding:1.5rem;
+      cursor:pointer;
+      position:relative;
+      transition:background .3s;
+    }
+    .card:hover{background:rgba(255,255,255,0.4);}
+    .card h3{font-family:'Playfair Display',serif;margin-bottom:.5rem;}
+    .badge{
+      position:absolute;top:8px;right:8px;background:var(--accent);
+      color:#fff;padding:2px 6px;font-size:.75rem;border-radius:3px;
+      opacity:0;transition:opacity .3s;
+    }
+    .card.show-badge .badge{opacity:1;}
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;
+      background:rgba(0,0,0,0.6);justify-content:center;align-items:center;
+      padding:1rem;
+    }
+    .modal-content{
+      background:#fff;padding:2rem;max-width:500px;width:100%;border-radius:6px;
+      position:relative;
+    }
+    .modal-close{
+      position:absolute;top:10px;right:10px;background:none;border:none;font-size:1.2rem;cursor:pointer;
+    }
+    .claim{
+      background:var(--primary);
+      color:#fff;
+      text-align:center;
+      padding:3rem 1rem;
+    }
+    .claim h2{
+      font-family:'Playfair Display',serif;
+      font-size:2.5rem;
+    }
+    .contact .container{
+      max-width:800px;margin:auto;display:flex;flex-direction:column;gap:1rem;
+    }
+    .contact .info{display:flex;align-items:center;gap:.5rem;}
+    .contact .info svg{width:24px;height:24px;fill:var(--primary);}
+    .contact .rating{display:flex;align-items:center;gap:.3rem;font-size:.9rem;}
+    .contact .rating svg{width:16px;height:16px;fill:#ffb400;}
+    .form{
+      background:#fff;padding:2rem;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    .form input,.form textarea{
+      width:100%;padding:.8rem;margin-top:.5rem;border:1px solid #ccc;border-radius:4px;
+    }
+    .form button{
+      margin-top:1rem;background:var(--primary);color:#fff;padding:.8rem 1.5rem;border:none;border-radius:4px;
+      cursor:pointer;transition:background .3s;
+    }
+    .form button:hover{background:var(--accent);}
+    footer{
+      text-align:center;padding:2rem;background:var(--primary);color:#fff;
+    }
+    .hidden{opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out;}
+    .visible{opacity:1;transform:none;}
+    @media(max-width:768px){
+      .hero h1{font-size:3rem;}
+      nav{flex-direction:column;gap:.5rem;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Bakery 148</div>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#services">Prodotti</a>
+      <a href="#why">Perché sceglierci</a>
+      <a href="#contact">Contatti</a>
+    </div>
+  </nav>
+</header>
+
+<section id="hero" class="hero">
+  <svg class="bg-wheat" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 160 L30 20 L40 160 Z" fill="#fff"/>
+    <path d="M60 160 L70 20 L80 160 Z" fill="#fff"/>
+    <path d="M100 160 L110 20 L120 160 Z" fill="#fff"/>
+    <path d="M140 160 L150 20 L160 160 Z" fill="#fff"/>
+  </svg>
+  <div class="container">
+    <h1>Bakery 148</h1>
+    <p>Il gusto della tradizione nel cuore di Torino</p>
+    <a href="#contact" class="cta">Richiedi un preventivo</a>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="grid hidden">
+    <div class="card" data-modal="modal1">
+      <h3>Pane Artigianale</h3>
+      <p>Classico, integrale, alle noci.</p>
+      <div class="badge">👆 Clicca per il dettaglio</div>
+    </div>
+    <div class="card" data-modal="modal2">
+      <h3>Dolci Freschi</h3>
+      <p>Croissant, brioche, pasticcini.</p>
+    </div>
+    <div class="card" data-modal="modal3">
+      <h3>Pasticceria Salata</h3>
+      <p>Focaccine, taralli, panini.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Modali -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Pane Artigianale</h3>
+    <p>Esempi dimostrativi — personalizzabili con i vostri contenuti reali:</p>
+    <ul>
+      <li><strong>Pane di Segale</strong> – crosta croccante, interno morbido.</li>
+      <li><strong>Ciabatta Rustica</strong> – alveoli grandi, perfetta per panini.</li>
+      <li><strong>Focaccia al Rosmarino</strong> – profumo aromatico.</li>
+    </ul>
+  </div>
+</div>
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Dolci Freschi</h3>
+    <p>Esempi dimostrativi — personalizzabili con i vostri contenuti reali:</p>
+    <ul>
+      <li><strong>Croissant al Burro</strong> – sfogliato e fragrante.</li>
+      <li><strong>Brioche alla Crema</strong> – soffice e dolce.</li>
+      <li><strong>Muffin ai Frutti di Bosco</strong> – leggero e succoso.</li>
+    </ul>
+  </div>
+</div>
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <h3>Pasticceria Salata</h3>
+    <p>Esempi dimostrativi — personalizzabili con i vostri contenuti reali:</p>
+    <ul>
+      <li><strong>Focaccine al Formaggio</strong> – dorate e filanti.</li>
+      <li><strong>Taralli al Semi</strong> – croccanti e saporiti.</li>
+      <li><strong>Panini Gourmet</strong> – farciti con ingredienti freschi.</li>
+    </ul>
+  </div>
+</div>
+
+<section id="why" class="why">
+  <div class="grid hidden" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
+    <div class="card">
+      <h3>Ingredienti locali</h3>
+      <p>Selezioniamo materie prime fresche da fornitori torinesi.</p>
+    </div>
+    <div class="card">
+      <h3>Ricette tradizionali</h3>
+      <p>Rispettiamo le tecniche artigianali tramandate da generazioni.</p>
+    </div>
+    <div class="card">
+      <h3>Servizio rapido</h3>
+      <p>Il tuo ordine pronto al minuto, senza compromessi sulla qualità.</p>
+    </div>
+  </div>
+</section>
+
+<section class="claim">
+  <h2>Il profumo del pane appena sfornato, ogni giorno.</h2>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container hidden">
+    <div class="info">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+      <span>Corso Trapani, 148, 10141 Torino TO, Italy</span>
+    </div>
+    <div class="info">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.5 2.53.78 3.88.78a1 1 0 011 1v3.5a1 1 0 01-1 1C9.85 22 2 14.15 2 4.5a1 1 0 011-1H6.5a1 1 0 011 1c0 1.35.28 2.67.78 3.88a1 1 0 01-.21 1.11l-2.45 2.45z"/></svg>
+      <span>334 784 0555</span>
+    </div>
+    <div class="rating">
+      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,6.63 18.66,7.27 14,11.42 15.18,17.45 10,14.47 4.82,17.45 6,11.42 1.34,7.27 7.41,6.63"/></svg>
+      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,6.63 18.66,7.27 14,11.42 15.18,17.45 10,14.47 4.82,17.45 6,11.42 1.34,7.27 7.41,6.63"/></svg>
+      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,6.63 18.66,7.27 14,11.42 15.18,17.45 10,14.47 4.82,17.45 6,11.42 1.34,7.27 7.41,6.63"/></svg>
+      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,6.63 18.66,7.27 14,11.42 15.18,17.45 10,14.47 4.82,17.45 6,11.42 1.34,7.27 7.41,6.63"/></svg>
+      <svg viewBox="0 0 20 20"><polygon points="10,1 12.59,6.63 18.66,7.27 14,11.42 15.18,17.45 10,14.47 4.82,17.45 6,11.42 1.34,7.27 7.41,6.63"/></svg>
+      <span>(41 recensioni)</span>
+    </div>
+
+    <div class="form">
+      <h3>Richiedi un preventivo</h3>
+      <label>Nome
+        <input type="text" id="name">
+      </label>
+      <label>Email
+        <input type="email" id="email">
+      </label>
+      <label>Messaggio
+        <textarea rows="4" id="msg"></textarea>
+      </label>
+      <button type="button" id="sendBtn">Invia</button>
+      <p style="font-size:.8rem;margin-top:.5rem;">(demo dimostrativa, i dati inseriti qui non vengono salvati)</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Bakery 148 – Torino
+</footer>
+
+<script>
+  // Fade‑in on scroll
+  const observer = new IntersectionObserver((entries)=> {
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        entry.target.classList.remove('hidden');
+      }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.hidden').forEach(el=>observer.observe(el));
+
+  // Modal handling
+  const cards = document.querySelectorAll('.card[data-modal]');
+  const modals = document.querySelectorAll('.modal');
+  const closeButtons = document.querySelectorAll('.modal-close');
+
+  cards.forEach(card=>{
+    card.addEventListener('click',()=>{
+      const modalId = card.getAttribute('data-modal');
+      document.getElementById(modalId).style.display='flex';
+    });
+  });
+
+  closeButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{ btn.parentElement.parentElement.style.display='none'; });
+  });
+
+  window.addEventListener('click',e=>{
+    modals.forEach(m=>{ if(e.target===m) m.style.display='none'; });
+  });
+
+  // Tooltip badge removal after first click
+  const firstCard = document.querySelector('.card[data-modal]');
+  if(firstCard){
+    firstCard.classList.add('show-badge');
+    firstCard.addEventListener('click',()=>{ firstCard.classList.remove('show-badge'); },{once:true});
+  }
+
+  // Form demo
+  document.getElementById('sendBtn').addEventListener('click',()=>{
+    alert('Grazie! Ti contatteremo a breve.');
+  });
+</script>
+</body>
+</html>
