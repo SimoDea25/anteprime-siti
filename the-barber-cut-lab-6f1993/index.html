@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Barber Cut Lab – Anteprima sito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#2C3E50;
+      --accent:#E74C3C;
+      --bg:#F5F5F5;
+      --text:#333;
+      --radius:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:'Roboto',sans-serif;
+      color:var(--text);
+      line-height:1.6;
+      background:var(--bg);
+    }
+    header{
+      background:var(--primary);
+      color:#fff;
+      position:sticky;top:0;z-index:10;
+    }
+    nav{
+      max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;
+    }
+    nav a{color:#fff;text-decoration:none;margin-left:1.5rem;font-weight:500;}
+    nav a:hover{color:var(--accent);}
+    .hero{
+      display:flex;flex-wrap:wrap;align-items:center;max-width:1200px;margin:auto;padding:4rem 1rem;
+    }
+    .hero-text{
+      flex:1 1 300px;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;
+      font-size:4rem;
+      margin-bottom:.5rem;
+      color:var(--primary);
+    }
+    .hero p{
+      font-size:1.2rem;margin-bottom:1.5rem;
+    }
+    .hero button{
+      background:var(--accent);color:#fff;border:none;padding:.8rem 1.5rem;
+      font-size:1rem;cursor:pointer;border-radius:var(--radius);
+      transition:background .3s;
+    }
+    .hero button:hover{background:#c43d2d;}
+    .hero svg{
+      position:absolute;right:-50px;top:20%;width:300px;height:auto;opacity:.1;
+    }
+    .section{
+      padding:3rem 1rem;
+    }
+    .section:nth-child(even){background:#fff;}
+    .section h2{
+      font-family:'Playfair Display',serif;
+      font-size:2.5rem;
+      color:var(--primary);
+      text-align:center;margin-bottom:2rem;
+    }
+    .services{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:1.5rem;max-width:1200px;margin:auto;
+    }
+    .card{
+      border:2px solid var(--primary);
+      padding:1.5rem;
+      cursor:pointer;
+      position:relative;
+      transition:transform .2s;
+    }
+    .card:hover{transform:translateY(-4px);}
+    .card h3{
+      font-size:1.4rem;margin-bottom:.5rem;
+    }
+    .card p{font-size:.95rem;}
+    .tooltip{
+      position:absolute;top:-10px;right:-10px;background:var(--accent);
+      color:#fff;padding:0.2rem 0.5rem;border-radius:12px;font-size:.8rem;
+      animation:fadeIn .5s forwards;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;
+      background:rgba(0,0,0,.6);justify-content:center;align-items:center;
+      padding:1rem;
+    }
+    .modal-content{
+      background:#fff;padding:2rem;border-radius:var(--radius);
+      max-width:500px;width:100%;position:relative;
+    }
+    .modal-content h3{margin-bottom:.5rem;color:var(--primary);}
+    .close{
+      position:absolute;top:.5rem;right:.5rem;background:none;
+      border:none;font-size:1.5rem;cursor:pointer;color:#999;
+    }
+    .close:hover{color:#000;}
+    .why{
+      max-width:800px;margin:auto;display:flex;flex-direction:column;gap:1.5rem;
+    }
+    .why-item{
+      background:var(--primary);color:#fff;padding:1rem 1.5rem;border-radius:var(--radius);
+    }
+    .contact{
+      max-width:800px;margin:auto;text-align:center;
+    }
+    .contact a{color:var(--primary);text-decoration:none;font-weight:500;}
+    .claim{
+      background:var(--accent);color:#fff;padding:2rem 1rem;text-align:center;
+    }
+    .claim h2{font-size:2rem;font-family:'Playfair Display',serif;}
+    footer{
+      text-align:center;padding:1rem;font-size:.9rem;color:#666;
+    }
+    .fade-section{
+      opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s;
+    }
+    .visible{opacity:1;transform:none;}
+    .appointment-form{
+      display:flex;flex-direction:column;gap:.8rem;max-width:400px;margin:2rem auto;
+    }
+    .appointment-form input, .appointment-form textarea{
+      padding:.6rem;border:1px solid #ccc;border-radius:var(--radius);
+      width:100%;font-family:inherit;
+    }
+    .appointment-form button{
+      background:var(--primary);color:#fff;border:none;padding:.8rem;
+      border-radius:var(--radius);cursor:pointer;transition:background .3s;
+    }
+    .appointment-form button:hover{background:#1a2838;}
+    .note{font-size:.85rem;color:#555;margin-top:.5rem;}
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div><strong>The Barber Cut Lab</strong></div>
+    <div>
+      <a href="#servizi">Servizi</a>
+      <a href="#perche">Perché noi</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>The Barber Cut Lab</h1>
+    <p>Taglio, barba e stile in un ambiente moderno. Scopri la differenza di un servizio su misura.</p>
+    <button id="openForm">Richiedi un appuntamento</button>
+  </div>
+  <svg viewBox="0 0 64 64" aria-hidden="true">
+    <path d="M20 10 L44 10 L44 54 L20 54 Z" fill="none" stroke="var(--primary)" stroke-width="4"/>
+    <path d="M30 20 L34 20 L34 30 L30 30 Z" fill="var(--accent)"/>
+    <path d="M26 38 L38 38 L38 42 L26 42 Z" fill="var(--accent)"/>
+  </svg>
+</section>
+
+<section id="claim" class="claim">
+  <h2>Il tuo look, la nostra passione</h2>
+</section>
+
+<section id="servizi" class="section fade-section">
+  <h2>I nostri servizi</h2>
+  <div class="services">
+    <div class="card" data-modal="modal1">
+      <div class="tooltip">👆 Clicca per il dettaglio</div>
+      <h3>Taglio classico</h3>
+      <p>Precisione e stile per ogni cliente.</p>
+    </div>
+    <div class="card" data-modal="modal2">
+      <h3>Barba curata</h3>
+      <p>Definizione e manutenzione della tua barba.</p>
+    </div>
+    <div class="card" data-modal="modal3">
+      <h3>Rasatura a lama</h3>
+      <p>Rasatura tradizionale per una pelle liscia.</p>
+    </div>
+  </div>
+</section>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <button class="close">&times;</button>
+    <h3>Taglio classico</h3>
+    <p>Consulenza personalizzata, taglio con forbici di alta precisione e styling finale.</p>
+    <p style="font-size:.85rem;color:#777;">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p>
+  </div>
+</div>
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <button class="close">&times;</button>
+    <h3>Barba curata</h3>
+    <p>Definizione dei contorni, modellatura e trattamento nutriente per la pelle.</p>
+    <p style="font-size:.85rem;color:#777;">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p>
+  </div>
+</div>
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <button class="close">&times;</button>
+    <h3>Rasatura a lama</h3>
+    <p>Rasatura tradizionale con lametta a mano libera, finitura impeccabile.</p>
+    <p style="font-size:.85rem;color:#777;">Esempio dimostrativo — personalizzabile con i vostri contenuti reali</p>
+  </div>
+</div>
+
+<section id="perche" class="section fade-section">
+  <h2>Perché scegliere noi</h2>
+  <div class="why">
+    <div class="why-item">🕒 Orari flessibili per adattarsi al tuo tempo.</div>
+    <div class="why-item">🪒 Strumenti di alta qualità e prodotti professionali.</div>
+    <div class="why-item">🤝 5 stelle su Google (18 recensioni) per la soddisfazione dei clienti.</div>
+  </div>
+</section>
+
+<section id="contatti" class="section fade-section">
+  <h2>Contatti</h2>
+  <div class="contact">
+    <p><strong>Indirizzo:</strong> Via Beaulard, 13, 10139 Torino TO, Italy</p>
+    <p><strong>Telefono:</strong> <a href="tel:+393520314256">+39 352 031 4256</a></p>
+  </div>
+</section>
+
+<footer>
+  The Barber Cut Lab – Torino
+</footer>
+
+<!-- Modal & Tooltip Script -->
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  },{threshold:0.2});
+  document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+
+  // Card modal logic
+  document.querySelectorAll('.card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      const id = card.dataset.modal;
+      document.getElementById(id).style.display='flex';
+      const tip = card.querySelector('.tooltip');
+      if(tip) tip.style.display='none';
+    });
+  });
+  document.querySelectorAll('.close').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.target.closest('.modal').style.display='none';
+    });
+  });
+  window.addEventListener('click',e=>{
+    if(e.target.classList.contains('modal')) e.target.style.display='none';
+  });
+
+  // Appointment form demo
+  const formHTML = `
+    <div class="appointment-form">
+      <input type="text" placeholder="Nome" required>
+      <input type="tel" placeholder="Telefono" required>
+      <textarea rows="3" placeholder="Messaggio (opzionale)"></textarea>
+      <button type="submit">Invia</button>
+      <div class="note">(demo dimostrativa, i dati inseriti qui non vengono salvati)</div>
+    </div>`;
+  function openForm(){
+    const overlay = document.createElement('div');
+    overlay.style.position='fixed';
+    overlay.style.top=0;overlay.style.left=0;overlay.style.width='100vw';
+    overlay.style.height='100vh';overlay.style.background='rgba(0,0,0,.5)';
+    overlay.style.display='flex';overlay.style.alignItems='center';
+    overlay.style.justifyContent='center';
+    overlay.innerHTML = `<div style="background:#fff;padding:2rem;border-radius:8px;position:relative;max-width:500px;width:90%;">${formHTML}<button style="position:absolute;top:.5rem;right:.5rem;background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button></div>`;
+    document.body.appendChild(overlay);
+    overlay.querySelector('button').addEventListener('click',()=>overlay.remove());
+    overlay.querySelector('form, .appointment-form').addEventListener('submit',e=>e.preventDefault());
+    overlay.querySelector('.appointment-form button').addEventListener('click',()=>{
+      alert('Grazie! Ti contatteremo a breve');
+      overlay.remove();
+    });
+  }
+  document.getElementById('openForm').addEventListener('click',openForm);
+</script>
+
+</body>
+</html>
