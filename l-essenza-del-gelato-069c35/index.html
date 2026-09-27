@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L&#x27;Essenza del Gelato — Gelateria a Torino</title>
+<meta name="description" content="L&#x27;Essenza del Gelato, gelateria in Via Principe Amedeo 21F a Torino.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#4f6b3a;--acc:#e0707a;--bg:#fffaf2;--soft:#f1ecd9;--ink:#2b2a22;--muted:#6c6a5c;--on-pri:#fffaf2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{overflow-x:clip;font-family:'Nunito Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:17px}
+h1,h2,h3,h4,.brand{font-family:'Fraunces',Georgia,serif;line-height:1.05;letter-spacing:-0.01em;font-weight:700}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{font-size:1.35rem;text-decoration:none;white-space:nowrap}
+.brand span{color:var(--acc)}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;font-size:.95rem;color:var(--muted);transition:color .2s}
+nav a:hover{color:var(--pri)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--pri);color:var(--on-pri);padding:15px 28px;border-radius:40px;text-decoration:none;font-weight:600;border:2px solid var(--pri);transition:transform .2s,background .2s,color .2s;cursor:pointer;font-size:1rem;font-family:inherit}
+.btn:hover{transform:translateY(-2px);background:transparent;color:var(--pri)}
+.btn.ghost{background:transparent;color:var(--pri)}
+.btn.ghost:hover{background:var(--pri);color:var(--on-pri)}
+.hero{position:relative;overflow:hidden;padding:110px 0 120px;background:linear-gradient(135deg,var(--bg) 0%,var(--soft) 100%)}
+.hero .deco{position:absolute;opacity:.16;pointer-events:none}
+.hero .d1{width:420px;right:-60px;top:30px;transform:rotate(-12deg)}
+.hero .d2{width:200px;right:340px;bottom:-30px;transform:rotate(18deg)}
+.hero .d3{width:130px;right:120px;bottom:60px;opacity:.22}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:22px}
+.hero h1{font-size:clamp(2.8rem,7vw,5.2rem);max-width:780px;margin-bottom:26px;position:relative}
+.hero h1 em{font-style:italic;color:var(--pri)}
+.hero p.lead{font-size:1.2rem;max-width:560px;color:var(--muted);margin-bottom:38px;position:relative}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;position:relative}
+.hero .where{margin-top:44px;font-size:.95rem;color:var(--muted);position:relative;display:flex;align-items:center;gap:10px}
+.hero .where::before{content:"";width:34px;height:2px;background:var(--acc)}
+section{padding:100px 0}
+.sec-head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.sec-head svg{width:40px;height:40px;flex:none}
+.sec-head span{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:18px;max-width:700px}
+.sub{color:var(--muted);max-width:620px;margin-bottom:54px}
+#servizi{background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0;border-top:1px solid color-mix(in srgb,var(--ink) 14%,transparent);border-left:1px solid color-mix(in srgb,var(--ink) 14%,transparent);position:relative}
+.card{text-align:left;background:transparent;border:0;border-right:1px solid color-mix(in srgb,var(--ink) 14%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent);padding:38px 30px;cursor:pointer;font:inherit;color:inherit;transition:background .25s;display:flex;flex-direction:column;gap:12px;min-height:250px}
+.card:hover{background:var(--soft)}
+.card .num,.modal .num{font-family:'Fraunces',serif;font-size:1rem;color:var(--acc);font-weight:700}
+.card h3{font-size:1.55rem}
+.card p{color:var(--muted);font-size:.98rem;flex:1}
+.card .more{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--pri);font-size:.92rem}
+.card:hover .more svg{transform:translateX(4px)}
+.card .more svg{transition:transform .2s}
+.hint{position:absolute;top:-18px;left:24px;background:var(--acc);color:#fff;font-size:.8rem;font-weight:600;padding:7px 14px;border-radius:40px;display:flex;align-items:center;gap:8px;animation:bob 1.6s ease-in-out infinite;transition:opacity .4s;z-index:3;box-shadow:0 6px 18px color-mix(in srgb,var(--acc) 35%,transparent)}
+.hint.hide{opacity:0;pointer-events:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.manifesto{background:var(--pri);color:var(--on-pri);position:relative;overflow:hidden;padding:120px 0}
+.manifesto p{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.8rem);line-height:1.12;max-width:920px;position:relative;font-weight:700}
+.manifesto small{display:block;margin-top:26px;font-family:'Nunito Sans',sans-serif;font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+.manifesto .deco{position:absolute;right:-40px;top:50%;transform:translateY(-50%) rotate(8deg);width:380px;opacity:.14}
+#perche{background:var(--soft)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
+.why-item{display:flex;gap:20px;align-items:flex-start}
+.why-item .big{font-family:'Fraunces',serif;font-size:3.6rem;line-height:.9;color:var(--acc);min-width:52px}
+.why-item h4{font-size:1.3rem;margin-bottom:8px}
+.why-item p{color:var(--muted)}
+#contatti .cols{display:grid;grid-template-columns:1fr 1.15fr;gap:60px;align-items:start}
+.c-label{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);font-weight:700;margin-top:26px}
+.c-val{font-size:1.3rem;font-family:'Fraunces',serif}
+.c-val a{text-decoration:none;border-bottom:2px solid color-mix(in srgb,var(--acc) 40%,transparent)}
+.c-val a:hover{border-color:var(--acc)}
+form{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:24px;padding:36px;display:grid;gap:16px}
+form h3{font-size:1.6rem}
+label{font-size:.85rem;font-weight:600;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:13px 14px;border:1px solid color-mix(in srgb,var(--ink) 20%,transparent);border-radius:8px;background:var(--bg);color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--acc);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.demo{font-size:.8rem;color:var(--muted)}
+.ok{display:none;background:var(--soft);border-left:4px solid var(--acc);padding:14px 16px;border-radius:6px;font-weight:600}
+footer{background:var(--ink);color:color-mix(in srgb,#fff 75%,transparent);padding:44px 0;font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer .brand{color:#fff}
+.modal{position:fixed;inset:0;background:rgba(15,15,15,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+.modal.open{display:flex;animation:fade .25s}
+.modal-box{background:var(--bg);max-width:540px;width:100%;border-radius:24px;padding:40px 36px;position:relative;max-height:88vh;overflow:auto;animation:up .3s}
+.modal-box h3{font-size:2rem;margin:8px 0 20px}
+.modal-box ul{list-style:none;display:grid;gap:16px}
+.modal-box li{display:grid;gap:2px;padding-bottom:14px;border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+.modal-box li span{color:var(--muted);font-size:.95rem}
+.demo-note{margin-top:20px;font-size:.8rem;color:var(--muted);font-style:italic}
+.close{position:absolute;top:14px;right:18px;background:none;border:0;font-size:2rem;cursor:pointer;color:var(--muted);line-height:1}
+@keyframes fade{from{opacity:0}}
+@keyframes up{from{transform:translateY(20px);opacity:0}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (max-width:820px){
+ nav{display:none}
+ .hero{padding:80px 0 90px}
+ .hero .d1{width:260px;right:-80px;top:10px} .hero .d2{display:none}
+ #contatti .cols{grid-template-columns:1fr;gap:40px}
+ section{padding:72px 0}
+ .row2{grid-template-columns:1fr}
+ .manifesto .deco{width:220px}
+}
+@media (max-width:480px){ .brand{font-size:1.1rem} header .btn{padding:10px 16px;font-size:.85rem} form{padding:24px} }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <a class="brand" href="#top">L'Essenza <span>del Gelato</span></a>
+ <nav><a href="#servizi">Il gelato</a><a href="#perche">Perché noi</a><a href="#contatti">Contatti</a></nav>
+ <a class="btn" href="#contatti">Vieni a trovarci</a>
+</div></header>
+
+<section class="hero" id="top">
+ <div class="deco d1"><svg viewBox="0 0 120 120" fill="none" stroke="#4f6b3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M36 58 L60 110 L84 58"/><path d="M44 74 L76 74 M50 88 L70 88"/><path d="M34 58 C30 40 46 30 56 38 C60 22 84 24 84 42 C94 44 92 58 86 58 Z"/></svg></div><div class="deco d2"><svg viewBox="0 0 120 120" fill="none" stroke="#e0707a" stroke-width="3" stroke-linecap="round"><ellipse cx="44" cy="40" rx="16" ry="12" transform="rotate(-40 44 40)"/><path d="M56 52 L100 100"/></svg></div><div class="deco d3"><svg viewBox="0 0 120 120" fill="none" stroke="#4f6b3a" stroke-width="3" stroke-linecap="round"><path d="M20 100 C20 50 60 18 104 18 C104 64 70 100 20 100 Z"/><path d="M20 100 L78 44"/><path d="M44 76 L44 58 M58 62 L74 62"/></svg></div>
+ <div class="wrap">
+  <span class="eyebrow reveal">Gelateria · Torino</span>
+  <h1 class="reveal">Il gelato, <em>ridotto all'essenziale</em>.</h1>
+  <p class="lead reveal">Pochi ingredienti, scelti bene, lavorati ogni giorno. Passa a trovarci in Via Principe Amedeo per una coppetta, un cono o una vaschetta da portare a casa.</p>
+  <div class="ctas reveal"><a class="btn" href="#contatti">Come raggiungerci</a><a class="btn ghost" href="#servizi">Cosa trovi da noi</a></div>
+  <p class="where reveal">Via Principe Amedeo 21F · Torino</p>
+ </div>
+</section>
+
+<section id="servizi"><div class="wrap">
+ <div class="sec-head reveal"><svg viewBox="0 0 120 120" fill="none" stroke="#e0707a" stroke-width="3" stroke-linecap="round"><ellipse cx="44" cy="40" rx="16" ry="12" transform="rotate(-40 44 40)"/><path d="M56 52 L100 100"/></svg><span>Il gelato</span></div>
+ <h2 class="reveal">Cosa trovi al banco.</h2>
+ <p class="sub reveal">Un&#x27;idea di come potrebbero essere presentati gusti e proposte della gelateria.</p>
+ <div class="grid"><div class="hint" id="hint"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M6 11l6-6 6 6"/></svg>Clicca per il dettaglio</div><button class="card reveal" data-modal="m1"><span class="num">01</span><h3>Creme</h3><p>I grandi classici, fatti come si deve.</p><span class="more">Scopri di più <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button><button class="card reveal" data-modal="m2"><span class="num">02</span><h3>Frutta</h3><p>Sorbetti e gusti di stagione, freschi e leggeri.</p><span class="more">Scopri di più <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button><button class="card reveal" data-modal="m3"><span class="num">03</span><h3>Da asporto</h3><p>Vaschette per la cena, per gli ospiti o per il divano.</p><span class="more">Scopri di più <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button><button class="card reveal" data-modal="m4"><span class="num">04</span><h3>Gusti speciali</h3><p>Proposte che cambiano durante l&#x27;anno.</p><span class="more">Scopri di più <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div>
+</div></section>
+
+<section class="manifesto"><div class="deco"><svg viewBox="0 0 120 120" fill="none" stroke="#fffaf2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M36 58 L60 110 L84 58"/><path d="M44 74 L76 74 M50 88 L70 88"/><path d="M34 58 C30 40 46 30 56 38 C60 22 84 24 84 42 C94 44 92 58 86 58 Z"/></svg></div><div class="wrap">
+ <p class="reveal">Un buon gelato non ha bisogno di presentazioni. Solo di un cucchiaino.</p><small class="reveal">L&#x27;Essenza del Gelato</small>
+</div></section>
+
+<section id="perche"><div class="wrap">
+ <div class="sec-head reveal"><svg viewBox="0 0 120 120" fill="none" stroke="#e0707a" stroke-width="3" stroke-linecap="round"><path d="M20 100 C20 50 60 18 104 18 C104 64 70 100 20 100 Z"/><path d="M20 100 L78 44"/><path d="M44 76 L44 58 M58 62 L74 62"/></svg><span>Perché noi</span></div>
+ <h2 class="reveal">Perché passare da noi.</h2>
+ <p class="sub reveal">Tre buoni motivi per fermarsi in Via Principe Amedeo.</p>
+ <div class="why"><div class="why-item reveal"><span class="big">1</span><div><h4>Ingredienti, prima di tutto</h4><p>Il gusto parte dalla materia prima: niente scorciatoie.</p></div></div><div class="why-item reveal"><span class="big">2</span><div><h4>Nel centro di Torino</h4><p>Una pausa dolce a pochi passi da Piazza Castello.</p></div></div><div class="why-item reveal"><span class="big">3</span><div><h4>Anche da portare a casa</h4><p>Vaschette pronte per cene, feste e serate in compagnia.</p></div></div></div>
+</div></section>
+
+<section id="contatti"><div class="wrap cols">
+ <div class="reveal">
+  <div class="sec-head"><svg viewBox="0 0 120 120" fill="none" stroke="#e0707a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M36 58 L60 110 L84 58"/><path d="M44 74 L76 74 M50 88 L70 88"/><path d="M34 58 C30 40 46 30 56 38 C60 22 84 24 84 42 C94 44 92 58 86 58 Z"/></svg><span>Contatti</span></div>
+  <h2>Ti aspettiamo al banco.</h2>
+  <p class="c-label">Indirizzo</p><p class="c-val"><a href="https://www.google.com/maps/search/?api=1&query=L%27Essenza+del+Gelato+Via+Principe+Amedeo%2C+21F%2C+10123+Torino+TO" target="_blank" rel="noopener">Via Principe Amedeo, 21F, 10123 Torino TO</a></p>
+  <p style="margin-top:34px"><a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=L%27Essenza+del+Gelato+Via+Principe+Amedeo%2C+21F%2C+10123+Torino+TO" target="_blank" rel="noopener">Apri su Google Maps</a></p>
+ </div>
+ <form class="reveal" id="demoForm" novalidate>
+  <h3>Prenota una vaschetta</h3>
+  <div class="row2"><label>Nome<input required placeholder="Il tuo nome"></label><label>Telefono<input type="tel" required placeholder="Il tuo numero"></label></div>
+  <label>Formato<select><option>Vaschetta piccola</option><option>Vaschetta media</option><option>Vaschetta grande</option><option>Per un evento</option></select></label>
+  <label>Giorno del ritiro<input type="date"></label>
+  <label>Note<textarea rows="3" placeholder="Es. gusti preferiti"></textarea></label>
+  <button class="btn" type="submit">Prenota il ritiro</button>
+  <p class="ok" id="okMsg">Grazie! Ti contatteremo a breve.</p>
+  <p class="demo">(demo dimostrativa, i dati inseriti qui non vengono salvati né inviati)</p>
+ </form>
+</div></section>
+
+<footer><div class="wrap"><span class="brand">L'Essenza <span>del Gelato</span></span><span>Via Principe Amedeo, 21F, 10123 Torino TO</span></div></footer>
+
+<div class="modal" id="m1" role="dialog" aria-modal="true"><div class="modal-box"><button class="close" aria-label="Chiudi">&times;</button><span class="num">01</span><h3>Creme</h3><ul><li><strong>Fiordilatte</strong><span>Il gusto più semplice, e per questo il più difficile.</span></li><li><strong>Nocciola</strong><span>Tostatura intensa, gusto pieno.</span></li><li><strong>Cioccolato</strong><span>Denso e scuro.</span></li></ul><p class="demo-note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</p></div></div><div class="modal" id="m2" role="dialog" aria-modal="true"><div class="modal-box"><button class="close" aria-label="Chiudi">&times;</button><span class="num">02</span><h3>Frutta</h3><ul><li><strong>Fragola</strong><span>Solo quando è stagione.</span></li><li><strong>Limone</strong><span>Il sorbetto più rinfrescante.</span></li><li><strong>Frutti di bosco</strong><span>Acidulo e profumato.</span></li></ul><p class="demo-note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</p></div></div><div class="modal" id="m3" role="dialog" aria-modal="true"><div class="modal-box"><button class="close" aria-label="Chiudi">&times;</button><span class="num">03</span><h3>Da asporto</h3><ul><li><strong>Vaschette</strong><span>In più formati, con i gusti che preferisci.</span></li><li><strong>Per eventi</strong><span>Quantità su richiesta per feste e occasioni.</span></li><li><strong>Consiglio</strong><span>Chiedi al banco quali gusti abbinare.</span></li></ul><p class="demo-note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</p></div></div><div class="modal" id="m4" role="dialog" aria-modal="true"><div class="modal-box"><button class="close" aria-label="Chiudi">&times;</button><span class="num">04</span><h3>Gusti speciali</h3><ul><li><strong>Gusto del mese</strong><span>Una novità da provare a ogni visita.</span></li><li><strong>Senza latte</strong><span>Alternative per chi non può o non vuole.</span></li><li><strong>Abbinamenti</strong><span>Suggerimenti su come comporre la coppetta.</span></li></ul><p class="demo-note">Esempio dimostrativo — personalizzabile con i vostri contenuti reali.</p></div></div>
+<script>
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const hint=document.getElementById('hint');const hideHint=()=>hint&&hint.classList.add('hide');setTimeout(hideHint,9000);
+document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{hideHint();document.getElementById(c.dataset.modal).classList.add('open')}));
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',ev=>{if(ev.target===m||ev.target.classList.contains('close'))m.classList.remove('open')}));
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'))});
+document.getElementById('demoForm').addEventListener('submit',ev=>{ev.preventDefault();document.getElementById('okMsg').style.display='block';ev.target.querySelector('button').disabled=true});
+</script>
+</body>
+</html>
